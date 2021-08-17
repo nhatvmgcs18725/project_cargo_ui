@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import TripCard from './TripCard';
+import TripCardRider from './TripCardRider';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function RiderDashboard (props) {
@@ -66,7 +66,7 @@ function RiderDashboard (props) {
           <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
 
-        <TripCard
+        <TripCardRider
           title='Current Trip'
           trips={getCurrentTrips()}
           group='rider'

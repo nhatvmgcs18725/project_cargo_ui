@@ -9,6 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { getUser } from '../services/AuthService';
 import { createTrip } from '../services/TripService';
 import Map from './Map';
+import axios from 'axios';
 
 function RiderRequest (props) {
   const [isSubmitted, setSubmitted] = useState(false);
@@ -32,9 +33,20 @@ function RiderRequest (props) {
       drop_off_address: values.dropOffAddress,
       cargo_weight : values.cargo_weight,
       cargo_note : values.cargo_note,
+      get_cargo_name : values.get_cargo_name,
+      phone_number_get_cargo: values.phone_number_get_cargo,
       rider: rider.id
     });
-    setSubmitted(true);
+    try {
+      axios(getUser());
+      setSubmitted(true);
+    }
+    catch (response) {
+      const data = response.response.data;
+      for (const value in data) {
+        actions.setFieldError(value, data[value].join(' '));
+      }
+    }
   };
 
   if (isSubmitted) {
@@ -50,7 +62,7 @@ function RiderRequest (props) {
           </LinkContainer>
           <Breadcrumb.Item active>Request</Breadcrumb.Item>
         </Breadcrumb>
-        <Card className='mb-3'>
+        <Card className='mb-3' bg = 'light' border="secondary">
           <Card.Header>Request Trip</Card.Header>
           <Card.Body>
             <Formik
@@ -58,26 +70,62 @@ function RiderRequest (props) {
                 pickUpAddress: '',
                 dropOffAddress: '',
                 cargo_weight:'',
-                cargo_note : '',
+                cargo_note : 'None',
+                get_cargo_name:'',
+                phone_number_get_cargo:'',
               }}
               onSubmit={onSubmit}
             >
               {({
-                handleChange,
-                handleSubmit,
-                isSubmitting,
-                values
+                 errors,
+                 handleChange,
+                 handleSubmit,
+                 isSubmitting,
+                 setFieldValue,
+                 values
               }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form  onSubmit={handleSubmit}>
+                   <Form.Group controlId='get_cargo_name'>
+                    <Form.Label>Name of consignee:</Form.Label>
+                    <Form.Control
+                      className={ 'get_cargo_name' in errors ? 'is-invalid' : '' }
+                      name='get_cargo_name'
+                      onChange={handleChange}
+                      values={values.get_cargo_name}
+                      required 
+                    />
+                    {
+                      'get_cargo_name' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.get_cargo_name }</Form.Control.Feedback>
+                    }
+                  </Form.Group>
+                  <Form.Group controlId='phone_number_get_cargo'>
+                    <Form.Label>Phone number of consignee:</Form.Label>
+                    <Form.Control
+                      className={ 'phone_number_get_cargo' in errors ? 'is-invalid' : '' }
+                      name='phone_number_get_cargo'
+                      onChange={handleChange}
+                      values={values.phone_number_get_cargo}
+                      required 
+                    />
+                    {
+                      'phone_number_get_cargo' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.phone_number_get_cargo }</Form.Control.Feedback>
+                    }
+                  </Form.Group>
                    <Form.Group controlId='cargo_weight'>
                     <Form.Label>cargo weight as kilogram:</Form.Label>
                     <Form.Control
-                      
+                      className={ 'cargo_weight' in errors ? 'is-invalid' : '' }
                       name='cargo_weight'
                       onChange={handleChange}
                       values={values.cargo_weight}
-                      required
+                      required 
                     />
+                    {
+                      'cargo_weight' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.cargo_weight }</Form.Control.Feedback>
+                    }
                   </Form.Group>
                   <Form.Group controlId='group'>
                     <Form.Label>commodity type</Form.Label>
@@ -99,9 +147,10 @@ function RiderRequest (props) {
                       name='pickUpAddress'
                       onChange={handleChange}
                       values={values.pickUpAddress}
-                      required
+                      required 
                     />
                   </Form.Group>
+                  <Card.Text></Card.Text>
                   <Map
                     lat={lat}
                     lng={lng}
@@ -116,15 +165,11 @@ function RiderRequest (props) {
                       name='dropOffAddress'
                       onChange={handleChange}
                       values={values.dropOffAddress}
+                      required 
                     />
                   </Form.Group>
-                  <Button
-                    block
-                    data-cy='submit'
-                    disabled={isSubmitting}
-                    type='submit'
-                    variant='primary'
-                  >Submit</Button>
+                  <Card.Text></Card.Text>
+                  <Button block type='submit' variant='primary' disabled={isSubmitting}>Submit</Button>
                 </Form>
               )}
             </Formik>

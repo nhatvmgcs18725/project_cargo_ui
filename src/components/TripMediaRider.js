@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Media } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-function TripMedia ({ trip, group, otherGroup }) {
+function TripMediaRider ({ trip, group, otherGroup }) {
   const user = trip[otherGroup];
   const photoUrl = new URL(user.image, `http://127.0.0.1:8000/media/Img_media/${user.image}`).href;
   const href = group ? `/${group}/${trip.id}` : undefined;
@@ -17,8 +17,8 @@ function TripMedia ({ trip, group, otherGroup }) {
         height={80}
       />
       <Media.Body>
-      <h5 className='mt-0 mb-1'>Name of consignor: {user.first_name} {user.last_name}</h5>
-        consignor phone number  {user.phone_number}<br />
+        <h5 className='mt-0 mb-1'>Driver: {user.first_name} {user.last_name}</h5>
+        Driver phone number  {user.phone_number}<br />
         Name of consignee  {trip.get_cargo_name}<br />
         Phone number of consignee: {trip.phone_number_get_cargo}<br />
         Note {trip.cargo_note} <br />
@@ -38,4 +38,4 @@ function TripMedia ({ trip, group, otherGroup }) {
   );
 }
 
-export default TripMedia;
+export default TripMediaRider;

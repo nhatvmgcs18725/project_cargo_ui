@@ -90,7 +90,7 @@ function SignUp (props) {
                       className={ 'email' in errors ? 'is-invalid' : '' }
                       name='email'
                       onChange={handleChange}
-                      required
+                      required 
                       values={values.email}
                       
                     />
@@ -106,7 +106,7 @@ function SignUp (props) {
                       name='firstName'
                       onChange={handleChange}
                       values={values.firstName}
-                      required
+                      required 
                     />
                     {
                       'firstName' in errors &&
@@ -120,7 +120,7 @@ function SignUp (props) {
                       name='lastName'
                       onChange={handleChange}
                       values={values.lastName}
-                      required
+                      required 
                     />
                     {
                       'lastName' in errors &&
@@ -181,7 +181,7 @@ function SignUp (props) {
                       name='phone_number'
                       onChange={handleChange}
                       values={values.phone_number}
-                      required isInvalid
+                      required
                     />
                     {
                       'phone_number' in errors &&
@@ -206,7 +206,7 @@ function SignUp (props) {
                     }
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary'>Sign up</Button>
+                  <Button block type='submit' variant='primary' >Sign up</Button>
                 </Form>
               )}
             </Formik>

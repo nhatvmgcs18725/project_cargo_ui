@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
 
-import TripMedia from './TripMedia';
+import TripMediaRider from './TripMediaRider';
 import { getTrip } from '../services/TripService';
 
 function RiderDetail ({ match }) {
@@ -22,13 +22,13 @@ function RiderDetail ({ match }) {
     loadTrip(match.params.id);
   }, [match]);
 
-  let tripMedia;
+  let TripMediaRider;
 
   if (trip === null) {
-    tripMedia = <>Loading...</>;
+    TripMediaRider = <>Loading...</>;
   } else {
-    tripMedia = (
-      <TripMedia
+    TripMediaRider = (
+      <TripMediaRider
         trip={trip}
         otherGroup='driver'
       />
@@ -46,7 +46,7 @@ function RiderDetail ({ match }) {
         </Breadcrumb>
         <Card className='mb-3' data-cy='trip-card'>
           <Card.Header>Trip</Card.Header>
-          <Card.Body>{tripMedia}</Card.Body>
+          <Card.Body>{TripMediaRider}</Card.Body>
         </Card>
       </Col>
     </Row>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Breadcrumb, Col, Row
+  Breadcrumb, Col, Row,Card
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import TripCard from './TripCard';
+import TripCardDriver from './TripCardDriver';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function Driverhistory (props) {
@@ -53,16 +53,20 @@ function Driverhistory (props) {
   return (
     <Row>
       <Col lg={12}>
+      <Card>
         <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+          <Breadcrumb.Item href='/driver'>Home</Breadcrumb.Item>
           <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
-        <TripCard
+        </Card>
+        <Card className='mb-3' bg = 'light' border="secondary">
+        <TripCardDriver
           title='Recent Trips'
           trips={getCompletedTrips()}
           group='driver'
           otherGroup='rider'
         />
+        </Card>
 
       </Col>
     </Row>

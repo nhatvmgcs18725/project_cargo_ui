@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-import TripMedia from './TripMediaRider';
+import TripMediaRiderH from './TripMediaRiderHistory';
 
 
-function TripCardRider ({ title, trips, group, otherGroup }) {
+function TripCardRiderH ({ title, trips, group, otherGroup }) {
     let cardBody;
     let mediaList;
   
@@ -12,7 +12,7 @@ function TripCardRider ({ title, trips, group, otherGroup }) {
       cardBody = <>No trips.</>
     } else {
       mediaList = trips.map(trip =>
-        <TripMedia
+        <TripMediaRiderH
           trip={trip}
           group={group}
           otherGroup={otherGroup}
@@ -29,4 +29,4 @@ function TripCardRider ({ title, trips, group, otherGroup }) {
     )
   }
   
-  export default TripCardRider;
+  export default TripCardRiderH;

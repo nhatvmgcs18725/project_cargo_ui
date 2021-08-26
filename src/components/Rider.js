@@ -6,6 +6,8 @@ import RiderDetail from './RiderDetail';
 import RiderRequest from './RiderRequest';
 import Change_pass from './Changepass';
 import Riderhistory from './Riderhistory';
+import Profile from './Profile';
+import ChangeProfile from './ChangeProfile';
 import { isRider } from '../services/AuthService';
 
 function Rider (props) {
@@ -16,6 +18,8 @@ function Rider (props) {
   return (
     <Switch>
       <Route path='/rider/request' component={RiderRequest} />
+      <Route path='/rider/Changeprofile' component={ChangeProfile} />
+      <Route path='/rider/profile' component={Profile} />
       <Route path='/rider/pass' component={Change_pass} />
       <Route path='/rider/history' component={Riderhistory} />
       <Route path='/rider/:id' component={RiderDetail} />

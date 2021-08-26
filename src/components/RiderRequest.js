@@ -9,7 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { getUser } from '../services/AuthService';
 import { createTrip } from '../services/TripService';
 import Map from './Map';
-import axios from 'axios';
+
 
 function RiderRequest (props) {
   const [isSubmitted, setSubmitted] = useState(false);
@@ -38,7 +38,6 @@ function RiderRequest (props) {
       rider: rider.id
     });
     try {
-      axios(getUser());
       setSubmitted(true);
     }
     catch (response) {
@@ -56,12 +55,14 @@ function RiderRequest (props) {
   return (
     <Row>
       <Col lg={12}>
+      <Card>
         <Breadcrumb>
           <LinkContainer to='/rider'>
             <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
           </LinkContainer>
           <Breadcrumb.Item active>Request</Breadcrumb.Item>
         </Breadcrumb>
+        </Card>
         <Card className='mb-3' bg = 'light' border="secondary">
           <Card.Header>Request Trip</Card.Header>
           <Card.Body>

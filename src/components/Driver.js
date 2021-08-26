@@ -5,6 +5,8 @@ import DriverDashboard from './DriverDashboard';
 import DriverDetail from './DriverDetail';
 import Change_pass from './Changepass';
 import Driverhistory from './Driverhistory';
+import Profile from './Profile';
+import ChangeProfile from './ChangeProfile';
 import { isDriver } from '../services/AuthService';
 
 function Driver (props) {
@@ -15,6 +17,8 @@ function Driver (props) {
   return (
     <Switch>
       <Route path='/driver/pass' component={Change_pass} />
+      <Route path='/driver/Changeprofile' component={ChangeProfile} />
+      <Route path='/driver/profile' component={Profile} />
       <Route path='/driver/history' component={Driverhistory} />
       <Route path='/driver/:id' component={DriverDetail} />
       <Route component={DriverDashboard} />

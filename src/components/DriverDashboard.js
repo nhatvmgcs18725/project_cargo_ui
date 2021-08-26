@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Breadcrumb, Col, Row
+  Breadcrumb, Col, Row,Card
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import TripCard from './TripCard';
+import TripCardDriver from './TripCardDriver';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function DriverDashboard (props) {
@@ -54,24 +54,30 @@ function DriverDashboard (props) {
     if (trip.driver === null) {
       toast.info(`Rider ${trip.rider.username} has requested a call.`);
     }
+    else if (trip.status === 'CANCELD') {
+      toast.info(`Rider ${trip.rider.first_name} has CANCELD.`);
+    }
+    
   };
 
   return (
     <Row>
       <Col lg={12}>
+      
         <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+          
           <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
+        
 
-        <TripCard
+        <TripCardDriver
           title='Current Trip'
           trips={getCurrentTrips()}
           group='driver'
           otherGroup='rider'
         />
 
-        <TripCard
+        <TripCardDriver
           title='Requested Trips'
           trips={getRequestedTrips()}
           group='driver'

@@ -40,10 +40,12 @@ function SignUp (props) {
   return (
     <Row>
       <Col lg={12}>
+        <Card>
         <Breadcrumb>
           <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
           <Breadcrumb.Item active>Sign up</Breadcrumb.Item>
         </Breadcrumb>
+        </Card>
         <Card className='mb-2' bg = 'light' border="secondary">
           <Card.Header>Sign up</Card.Header>
           <Card.Body>

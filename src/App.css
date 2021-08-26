@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Patua+One");
+
 .App {
   text-align: center;
 }
@@ -12,37 +14,17 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.landing {
+  font-size: 72px;
 }
 
 .App-link {
-  color: #61dafb;
+  color: green;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.image_back {
-  background-image: url("./logo.svg");
-  padding: 25%;
-}
 .pt-3 {
   margin: auto;
-  width: 60%;
+  width: 100%;
 
   padding: 10px;
 }
@@ -52,10 +34,7 @@
   text-align: center;
   padding: 10px;
 }
-.landing logo {
-  text-align: center;
-  margin: auto;
-  width: 60%;
-
-  padding: 10px;
+.logo {
+  font-family: "Patua One", sans-serif;
+  font-weight: 400;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Button, Container, Form, Nav, Navbar,
+  Button, Container, Form, Nav, Navbar, Card
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
@@ -12,11 +12,21 @@ import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Driver from './components/Driver.js';
 import Rider from './components/Rider.js';
-import ResetPassword from './components/ResetPassword';
+import ResetPassword from'./components/ResetPassword';
 import ResetPasswordConfirm from './components/ResetPasswordConfirm';
+import Profile from './components/Profile';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+
+
+
+
+import Footer from './UI/Footer';
+import image1 from './asset/xa.png';
+
+
 
 function App () {
   const [isLoggedIn, setLoggedIn] = useState(() => {
@@ -46,56 +56,15 @@ function App () {
 
   return (
     <div>
+    
+    <div>
       <Navbar bg='light' expand='lg' variant='light'>
         <LinkContainer to='/'>
-          <Navbar.Brand className='logo'>Let's go</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          {
-            isRider() && (
-              <Nav className='mr-auto'>
-                <LinkContainer to='/rider/request'>
-                  <Nav.Link>Request a trip</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/rider/history'>
-                <Nav.Link>History</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to='/rider/pass'>
-                <Nav.Link>Change password</Nav.Link>
-              </LinkContainer>
-              </Nav>
-            )
-          }
-          {
-            isDriver() && (
-              <Nav className='mr-auto'>
-                <LinkContainer to='/driver/pass'>
-                  <Nav.Link>Change password</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/driver/history'>
-                  <Nav.Link>History</Nav.Link>
-                </LinkContainer>
-            </Nav>
-            )
-          }
-          {
-            isLoggedIn && (
-              <Form inline className='ml-auto'>
-                <Button
-                  type='button'
-                  onClick={() => logOut()}
-                >Log out</Button>
-              </Form>
-            )
-          }
-        </Navbar.Collapse>
-      </Navbar>
-      <Container className='pt-3'>
-        <Switch>
+          <Navbar.Brand className='logo'>Let's go
+          <Switch >
           <Route exact path='/' render={() => (
-            <div className='middle-center'>
-              <h1 className='landing logo'>Let's go</h1>
+            <div className='middle-center' >
+              
               {
                 !isLoggedIn && (
                   <>
@@ -130,6 +99,68 @@ function App () {
               }
             </div>
           )} />
+        </Switch>
+          
+          
+          
+          
+          </Navbar.Brand>
+        </LinkContainer>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          {
+            isRider() && (
+              <Nav className='mr-auto'>
+                <LinkContainer to='/rider/request'>
+                  <Nav.Link>Request a trip</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='/rider/history'>
+                <Nav.Link>History</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/rider/profile'>
+                <Nav.Link>My Profile</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/rider/pass'>
+                <Nav.Link>Change password</Nav.Link>
+              </LinkContainer>
+              
+              </Nav>
+            )
+          }
+          {
+            isDriver() && (
+              <Nav className='mr-auto'>
+                
+              <LinkContainer to='/driver/history'>
+                  <Nav.Link>History</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to='/driver/profile'>
+                <Nav.Link>My Profile</Nav.Link>
+              </LinkContainer>
+                <LinkContainer to='/driver/pass'>
+                  <Nav.Link>Change password</Nav.Link>
+                </LinkContainer>
+                
+                
+            </Nav>
+            )
+          }
+          {
+            isLoggedIn && (
+              <Form inline className='ml-auto'>
+                <Button
+                  type='button'
+                  variant='danger'
+                  onClick={() => logOut()}
+                >Log out</Button>
+              </Form>
+            )
+          }
+        </Navbar.Collapse>
+      </Navbar>
+      <Container className='pt-3'>
+        <Switch >
+                
           <Route path='/sign-up' render={() => (
             isLoggedIn ? (
               <Redirect to='/' />
@@ -167,7 +198,15 @@ function App () {
         </Switch>
       </Container>
       <ToastContainer />
+      
     </div>
+    
+    <Card.Footer>
+      <Footer />
+    </Card.Footer>
+  
+    </div>
+    
   );
 }
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Breadcrumb, Col, Row
+  Breadcrumb, Col, Row,Card
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import TripCardRider from './TripCardRider';
+
+
+import TripCardRiderH from './TripCardRiderhistory';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function RiderDashboard (props) {
@@ -43,7 +45,8 @@ function RiderDashboard (props) {
       return (
         trip.driver !== null &&
         trip.status !== 'REQUESTED' &&
-        trip.status !== 'COMPLETED'
+        trip.status !== 'COMPLETED' &&
+        trip.status !=='CANCELD'
       );
     });
   };
@@ -56,22 +59,28 @@ function RiderDashboard (props) {
     } else if (trip.status === 'COMPLETED') {
       toast.info(`Driver ${trip.driver.first_name} has dropped you off.`);
     }
+    else if (trip.status === 'CANCELD') {
+      toast.info(`Rider ${trip.rider.first_name} has CANCELD.`);
+    }
   };
 
   return (
     <Row>
       <Col lg={12}>
+      <Card>
         <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+          
           <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
+        </Card>
 
-        <TripCardRider
+        <TripCardRiderH
           title='Current Trip'
           trips={getCurrentTrips()}
           group='rider'
           otherGroup='driver'
         />
+       
 
       </Col>
     </Row>

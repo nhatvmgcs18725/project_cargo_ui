@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Breadcrumb, Col, Row
+  Breadcrumb, Card, Col, Row
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import TripCardRider from './TripCardRider';
+
+import TripCardRiderH from './TripCardRiderhistory';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function Riderhistory (props) {
@@ -57,13 +58,16 @@ function Riderhistory (props) {
 
   return (
     <Row>
+      
       <Col lg={12}>
+      <Card>
         <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+          <Breadcrumb.Item href='/rider'>Home</Breadcrumb.Item>
           <Breadcrumb.Item active>History</Breadcrumb.Item>
         </Breadcrumb>
+        </Card>
 
-        <TripCardRider
+        <TripCardRiderH
           title='Recent Trips'
           trips={getCompletedTrips()}
           group='rider'

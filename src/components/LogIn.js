@@ -28,10 +28,12 @@ function LogIn ({ logIn }) {
   return (
     <Row>
       <Col lg={12}>
+        <Card>
         <Breadcrumb>
           <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
           <Breadcrumb.Item active>Log in</Breadcrumb.Item>
         </Breadcrumb>
+        </Card>
         <Card border="secondary" >
           <Card.Header>Log in</Card.Header>
           <Card.Body>

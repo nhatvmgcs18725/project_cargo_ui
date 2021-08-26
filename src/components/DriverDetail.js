@@ -8,6 +8,9 @@ import TripMedia from './TripMedia';
 import { getUser } from '../services/AuthService';
 import { getTrip, updateTrip } from '../services/TripService';
 
+import '../UI/Bt.css';
+
+
 function DriverDetail ({ match }) {
   const [trip, setTrip] = useState(null);
 
@@ -50,19 +53,22 @@ function DriverDetail ({ match }) {
   return (
     <Row>
       <Col lg={12}>
+        <Card>
         <Breadcrumb>
           <LinkContainer to='/driver'>
             <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
           </LinkContainer>
           <Breadcrumb.Item active>Trip</Breadcrumb.Item>
         </Breadcrumb>
+        </Card>
         <Card className='mb-3' data-cy='trip-card'>
           <Card.Header>Trip</Card.Header>
           <Card.Body>{tripMedia}</Card.Body>
-          <Card.Footer>
+          <Card.Body>
             {
               trip !== null && trip.status === 'REQUESTED' && (
                 <Button
+                  className="Butt"
                   data-cy='status-button'
                   block
                   variant='primary'
@@ -74,6 +80,7 @@ function DriverDetail ({ match }) {
             {
               trip !== null && trip.status === 'STARTED' && (
                 <Button
+                  className="Butt"
                   data-cy='status-button'
                   block
                   variant='primary'
@@ -85,20 +92,21 @@ function DriverDetail ({ match }) {
             {
               trip !== null && trip.status === 'IN_PROGRESS' && (
                 <Button
+                className="Butt"
                   data-cy='status-button'
                   block
-                  variant='primary'
+                  variant='success'
                   onClick={() => updateTripStatus('COMPLETED')}
                 >Complete trip
                 </Button>
               )
             }
             {
-              trip !== null && !['REQUESTED', 'STARTED', 'IN_PROGRESS'].includes(trip.status) && (
+              trip !== null && !['REQUESTED', 'STARTED', 'IN_PROGRESS','CANCELD'].includes(trip.status) && (
                 <span className='text-center'>Completed</span>
               )
             }
-          </Card.Footer>
+          </Card.Body>
         </Card>
       </Col>
     </Row>

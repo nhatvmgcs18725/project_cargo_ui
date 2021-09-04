@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button,Image} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
+import '../UI/RiDiDe.css';
 
 function TripMedia({ trip, group, otherGroup }) {
   const user = trip[otherGroup];
@@ -14,8 +14,13 @@ function TripMedia({ trip, group, otherGroup }) {
           <div className="panel-body inf-content">
             <div className="row">
               <div className="col-md-4">
-              <Image src= {user.image} width={300}
-          height={250} roundedCircle fluid/>
+              <div className="card">
+            <div className="card-body">
+              <div className="d-flex flex-column align-items-center text-center">
+              <img src={user.image}   className='img-fluid'/>
+              </div>
+            </div>
+            </div>
                 <ul title="Ratings" className="list-inline ratings text-center">
                   <li><a href="#"><span className="glyphicon glyphicon-star" /></a></li>
                   <li><a href="#"><span className="glyphicon glyphicon-star" /></a></li>

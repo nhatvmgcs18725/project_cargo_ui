@@ -58,7 +58,7 @@ function LogIn ({ logIn }) {
                       { errors['__all__'] }
                     </Alert>
                   }
-                  <Form noValidate onSubmit={handleSubmit}>
+                  <Form  onSubmit={handleSubmit}>
                     <Form.Group controlId='username'>
                       <Form.Label>Username:</Form.Label>
                       <Form.Control
@@ -94,7 +94,7 @@ function LogIn ({ logIn }) {
             Don't have an account? <Link to='/sign-up'>Sign up!</Link>
           </p>
           <p className='mt-3 text-center'>
-            Forgot password <Link to='/reset-password'>reset password</Link>
+            Forgot password? <Link to='/reset-password'>Reset password!</Link>
           </p>
         </Card>
       </Col>

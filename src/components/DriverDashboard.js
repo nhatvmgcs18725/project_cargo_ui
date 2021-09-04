@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import TripCardDriver from './TripCardDriver';
 import { connect, getTrips, messages } from '../services/TripService';
 
+import '../UI/Bt.css';
+
 function DriverDashboard (props) {
   const [trips, setTrips] = useState([]);
 
@@ -52,10 +54,10 @@ function DriverDashboard (props) {
 
   const updateToast = (trip) => {
     if (trip.driver === null) {
-      toast.info(`Rider ${trip.rider.username} has requested a call.`);
+      toast.info(`Rider ${trip.rider.first_name} has requested a call.`);
     }
     else if (trip.status === 'CANCELD') {
-      toast.info(`Rider ${trip.rider.first_name} has CANCELD.`);
+      toast.error(`Rider ${trip.rider.first_name} has CANCELD.`);
     }
     
   };

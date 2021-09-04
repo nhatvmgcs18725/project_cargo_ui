@@ -58,14 +58,4 @@ export const getTrips = async () => {
   }
 };
 
-export const axn = async () => {
-  const url = `http://127.0.0.1:8000/api`;
-  const token = getAccessToken();
-  const headers = { Authorization: `Bearer ${token}` };
-  try {
-    const response = await axios.get(url, { headers });
-    return { response, isError: false };
-  } catch (response) {
-    return { response, isError: true };
-  }
-};
+

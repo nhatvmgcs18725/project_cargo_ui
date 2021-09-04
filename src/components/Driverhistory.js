@@ -46,7 +46,7 @@ function Driverhistory (props) {
 
   const updateToast = (trip) => {
     if (trip.driver === null) {
-      toast.info(`Rider ${trip.rider.username} has requested a call.`);
+      toast.info(`Rider ${trip.rider.first_name} has requested a call.`);
     }
   };
 

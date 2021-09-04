@@ -9,13 +9,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { getUser } from '../services/AuthService';
 import { createTrip } from '../services/TripService';
 import Map from './Map';
+import { toast } from 'react-toastify';
 
 
 function RiderRequest (props) {
   const [isSubmitted, setSubmitted] = useState(false);
 
-  const [lat, setLat] = useState(38.897957);
-  const [lng, setLng] = useState(-77.036560);
+  const [lat, setLat] = useState(10.781418);
+  const [lng, setLng] = useState(106.698321);
 
   useEffect(() => {
     if (window.navigator.geolocation) {
@@ -38,9 +39,11 @@ function RiderRequest (props) {
       rider: rider.id
     });
     try {
-      setSubmitted(true);
+      setSubmitted(true)
+      
     }
     catch (response) {
+      toast.error(response.status)
       const data = response.response.data;
       for (const value in data) {
         actions.setFieldError(value, data[value].join(' '));
@@ -106,6 +109,8 @@ function RiderRequest (props) {
                       className={ 'phone_number_get_cargo' in errors ? 'is-invalid' : '' }
                       name='phone_number_get_cargo'
                       onChange={handleChange}
+                      minLength={8}
+                      pattern='^\+?1?\d{8,15}$'
                       values={values.phone_number_get_cargo}
                       required 
                     />
@@ -120,6 +125,8 @@ function RiderRequest (props) {
                       className={ 'cargo_weight' in errors ? 'is-invalid' : '' }
                       name='cargo_weight'
                       onChange={handleChange}
+                      maxLength={3}
+                      pattern='^\+?1?\d{1,5}$'
                       values={values.cargo_weight}
                       required 
                     />
@@ -148,17 +155,16 @@ function RiderRequest (props) {
                       name='pickUpAddress'
                       onChange={handleChange}
                       values={values.pickUpAddress}
-                      required 
+                      required
                     />
                   </Form.Group>
-                  <Card.Text></Card.Text>
                   <Map
-                    lat={lat}
-                    lng={lng}
-                    zoom={13}
-                    pickUpAddress={values.pickUpAddress}
-                    dropOffAddress={values.dropOffAddress}
-                  />
+                      lat={lat}
+                      lng={lng}
+                      zoom={13}
+                      pickUpAddress={values.pickUpAddress}
+                      dropOffAddress={values.dropOffAddress}
+                    />
                   <Form.Group controlId='dropOffAddress'>
                     <Form.Label>Drop off address:</Form.Label>
                     <Form.Control
@@ -166,11 +172,10 @@ function RiderRequest (props) {
                       name='dropOffAddress'
                       onChange={handleChange}
                       values={values.dropOffAddress}
-                      required 
                     />
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary' disabled={isSubmitting}>Submit</Button>
+                  <Button className="Butt" block type='submit' variant='primary' disabled={isSubmitting}>Submit</Button>
                 </Form>
               )}
             </Formik>

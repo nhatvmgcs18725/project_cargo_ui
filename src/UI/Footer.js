@@ -21,8 +21,8 @@ function Footer() {
             <h4>Simple carry your cargo</h4>
             <ui className="list-unstyled">
               <li>Fast</li>
-              <li>uy tin</li>
-              <li>dam bao</li>
+              <li>Professional</li>
+              <li>Secure</li>
             </ui>
           </div>
         </div>

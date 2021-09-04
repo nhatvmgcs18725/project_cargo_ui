@@ -59,7 +59,7 @@ const ResetPasswordConfirm = ({match}) =>  {
                 setFieldValue,
                 values
               }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form  validated onSubmit={handleSubmit}>
                     <Form.Group controlId='token'>
                     <Form.Label>key to reset password:</Form.Label>
                     <Form.Control

@@ -48,11 +48,11 @@ function Riderhistory (props) {
 
   const updateToast = (trip) => {
     if (trip.status === 'STARTED') {
-      toast.info(`Driver ${trip.driver.username} is coming to pick you up.`);
+      toast.success(`Driver ${trip.driver.first_name} is coming to Send your cargo.`);
     } else if (trip.status === 'IN_PROGRESS') {
-      toast.info(`Driver ${trip.driver.username} is headed to your destination.`);
+      toast.success(`Driver ${trip.driver.first_name} is headed to your destination.`);
     } else if (trip.status === 'COMPLETED') {
-      toast.info(`Driver ${trip.driver.username} has dropped you off.`);
+      toast.success(`Driver ${trip.driver.first_name} has dropped cargo off.`);
     }
   };
 

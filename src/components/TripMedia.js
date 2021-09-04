@@ -3,13 +3,14 @@ import { Button, Media,Col,Card,Image } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import Map from './Map';
 
+import '../UI/RiDiDe.css';
+
 function TripMedia ({ trip, group, otherGroup }) {
   const user = trip[otherGroup];
   const photoUrl = new URL(user.image, `http://127.0.0.1:8000/media/Img_media/${user.image}`).href;
   const href = group ? `/${group}/${trip.id}` : undefined;
-  const [lat, setLat] = useState(38.897957);
-  const [lng, setLng] = useState(-77.036560);
-
+  const [lat, setLat] = useState(10.781418);
+  const [lng, setLng] = useState(106.698321);
   useEffect(() => {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition((position) => {
@@ -20,14 +21,20 @@ function TripMedia ({ trip, group, otherGroup }) {
   }, []);
 
 
+
   return (
     <div>
       <div className="container bootstrap snippets bootdey">
         <div className="panel-body inf-content">
           <div className="row">
             <div className="col-md-4">
-            <Image src= {user.image} width={300}
-        height={250} roundedCircle fluid/>
+            <div className="card">
+            <div className="card-body">
+              <div className="d-flex flex-column align-items-center text-center">
+                <img src={user.image}  className='img-fluid'/>
+              </div>
+            </div>
+            </div>
               <ul title="Ratings" className="list-inline ratings text-center">
                 <li><a href="#"><span className="glyphicon glyphicon-star" /></a></li>
                 <li><a href="#"><span className="glyphicon glyphicon-star" /></a></li>
@@ -143,8 +150,8 @@ function TripMedia ({ trip, group, otherGroup }) {
                     lat={lat}
                     lng={lng}
                     zoom={13}
-                    pickUpAddress={trip.pickUpAddress}
-                    dropOffAddress={trip.dropOffAddress}
+                    pickUpAddress={trip.pick_up_address}
+                    dropOffAddress={trip.drop_off_address}
                   />
   
     </div>

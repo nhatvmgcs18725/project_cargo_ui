@@ -55,10 +55,10 @@ function ResetPassword (props)  {
                     setFieldValue,
                     values
                   }) => (
-                    <Form noValidate onSubmit={handleSubmit}>
+                    <Form validated onSubmit={handleSubmit}>
                       
                       <Form.Group controlId='email'>
-                        <Form.Label>email:</Form.Label>
+                        <Form.Label>Email:</Form.Label>
                         <Form.Control
                           className={ 'email' in errors ? 'is-invalid' : '' }
                           name='email'
@@ -72,7 +72,8 @@ function ResetPassword (props)  {
                           <Form.Control.Feedback type='invalid'>{ errors.email }</Form.Control.Feedback>
                         }
                       </Form.Group>
-                      <Button block type='submit' variant='primary'>Send</Button>
+                      <Card.Text></Card.Text>
+                      <Button block type='submit' variant='primary'> Send </Button>
                     </Form>
                   )}
                 </Formik>

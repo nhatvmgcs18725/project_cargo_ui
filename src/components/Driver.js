@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import DriverDashboard from './DriverDashboard';
 import DriverDetail from './DriverDetail';
-import Change_pass from './Changepass';
+
 import Driverhistory from './Driverhistory';
 import Profile from './Profile';
 import ChangeProfile from './ChangeProfile';
@@ -16,7 +16,7 @@ function Driver (props) {
 
   return (
     <Switch>
-      <Route path='/driver/pass' component={Change_pass} />
+      
       <Route path='/driver/Changeprofile' component={ChangeProfile} />
       <Route path='/driver/profile' component={Profile} />
       <Route path='/driver/history' component={Driverhistory} />

@@ -49,6 +49,7 @@ function DriverDetail ({ match }) {
       />
     )
   }
+  
 
   return (
     <Row>
@@ -71,26 +72,28 @@ function DriverDetail ({ match }) {
                   className="Butt"
                   data-cy='status-button'
                   block
-                  variant='primary'
+                  variant="primary"
                   onClick={() => updateTripStatus('STARTED')}
                 >Drive to pick up
                 </Button>
               )
             }
             {
-              trip !== null && trip.status === 'STARTED' && (
+              trip !== null && trip.status === 'STARTED'  && trip.status !='CANCELD' && (
                 <Button
                   className="Butt"
+                  variant="primary"
                   data-cy='status-button'
                   block
-                  variant='primary'
                   onClick={() => updateTripStatus('IN_PROGRESS')}
                 >Drive to drop off
                 </Button>
               )
             }
+              
+            
             {
-              trip !== null && trip.status === 'IN_PROGRESS' && (
+              trip !== null && trip.status === 'IN_PROGRESS' && trip.status !='CANCELD' && (
                 <Button
                 className="Butt"
                   data-cy='status-button'
@@ -101,6 +104,7 @@ function DriverDetail ({ match }) {
                 </Button>
               )
             }
+          
             {
               trip !== null && !['REQUESTED', 'STARTED', 'IN_PROGRESS','CANCELD'].includes(trip.status) && (
                 <span className='text-center'>Completed</span>

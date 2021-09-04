@@ -71,12 +71,13 @@ function SignUp (props) {
                 setFieldValue,
                 values
               }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form validated onSubmit={handleSubmit}>
                   <Form.Group controlId='username'>
                     <Form.Label>Username:</Form.Label>
                     <Form.Control
                       className={ 'username' in errors ? 'is-invalid' : '' }
                       name='username'
+                      minLength={4}
                       onChange={handleChange}
                       values={values.username}
                       required
@@ -87,7 +88,7 @@ function SignUp (props) {
                     }
                   </Form.Group>
                   <Form.Group controlId='email'>
-                    <Form.Label>email:</Form.Label>
+                    <Form.Label>Email:</Form.Label>
                     <Form.Control
                       className={ 'email' in errors ? 'is-invalid' : '' }
                       name='email'
@@ -106,6 +107,7 @@ function SignUp (props) {
                     <Form.Control
                       className={ 'firstName' in errors ? 'is-invalid' : '' }
                       name='firstName'
+                      minLength={2}
                       onChange={handleChange}
                       values={values.firstName}
                       required 
@@ -120,6 +122,7 @@ function SignUp (props) {
                     <Form.Control
                       className={ 'lastName' in errors ? 'is-invalid' : '' }
                       name='lastName'
+                      minLength={2}
                       onChange={handleChange}
                       values={values.lastName}
                       required 
@@ -145,7 +148,7 @@ function SignUp (props) {
                     }
                   </Form.Group>
                   <Form.Group controlId='password2'>
-                    <Form.Label>re input Password:</Form.Label>
+                    <Form.Label>Confirm Password:</Form.Label>
                     <Form.Control
                       className={ 'password2' in errors ? 'is-invalid' : '' }
                       name='password2'
@@ -177,7 +180,7 @@ function SignUp (props) {
                     }
                   </Form.Group>
                   <Form.Group controlId='phone_number'>
-                    <Form.Label>phone_number:</Form.Label>
+                    <Form.Label>Phone_number:</Form.Label>
                     <Form.Control
                       className={ 'phone_number' in errors ? 'is-invalid' : '' }
                       name='phone_number'
@@ -217,7 +220,7 @@ function SignUp (props) {
             Already have an account? <Link to='/log-in'>Log in!</Link>
           </p>
           <p className='mt-3 text-center'>
-            Forgot password <Link to='/reset-password'>reset password</Link>
+            Forgot password? <Link to='/reset-password'>Reset password!</Link>
           </p>
         </Card>
       </Col>

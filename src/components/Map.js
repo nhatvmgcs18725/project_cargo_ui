@@ -7,7 +7,7 @@ import {
   Marker
 } from '@react-google-maps/api'; // changed
 
-function Map (props) {
+function Map(props) {
   const [response, setResponse] = useState(null); // new
 
   // new
@@ -25,7 +25,7 @@ function Map (props) {
 
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyDxdf5ioJNNISU2C9vbxR_iy_2BU04jGDw"
+      googleMapsApiKey="aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     >
       <GoogleMap
         center={{

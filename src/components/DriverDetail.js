@@ -11,7 +11,7 @@ import { getTrip, updateTrip } from '../services/TripService';
 import '../UI/Bt.css';
 
 
-function DriverDetail ({ match }) {
+function DriverDetail({ match }) {
   const [trip, setTrip] = useState(null);
 
   useEffect(() => {
@@ -28,16 +28,19 @@ function DriverDetail ({ match }) {
 
   const updateTripStatus = (status) => {
     const driver = getUser();
-    const updatedTrip = {...trip, driver, status};
+    const updatedTrip = { ...trip, driver, status };
     updateTrip({
       ...updatedTrip,
       driver: updatedTrip.driver.id,
       rider: updatedTrip.rider.id
+
     });
     setTrip(updatedTrip);
+
   };
 
   let tripMedia;
+
 
   if (trip === null) {
     tripMedia = <>Loading...</>;
@@ -49,18 +52,41 @@ function DriverDetail ({ match }) {
       />
     )
   }
-  
+
+  useEffect(() => {
+    {
+
+      setTimeout(reloadPage, 15000)
+    }
+
+  });
+
+
+  function reloadPage() {
+    if (trip !== null && trip.status === 'REQUESTED') {
+      window.location.reload();
+    }
+  }
+
+
+
+
+
+
+
+
+
 
   return (
     <Row>
       <Col lg={12}>
         <Card>
-        <Breadcrumb>
-          <LinkContainer to='/driver'>
-            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-          </LinkContainer>
-          <Breadcrumb.Item active>Trip</Breadcrumb.Item>
-        </Breadcrumb>
+          <Breadcrumb>
+            <LinkContainer to='/driver'>
+              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+            </LinkContainer>
+            <Breadcrumb.Item active>Trip</Breadcrumb.Item>
+          </Breadcrumb>
         </Card>
         <Card className='mb-3' data-cy='trip-card'>
           <Card.Header>Trip</Card.Header>
@@ -73,13 +99,15 @@ function DriverDetail ({ match }) {
                   data-cy='status-button'
                   block
                   variant="primary"
-                  onClick={() => updateTripStatus('STARTED')}
+
+                  onClick={() => { updateTripStatus('STARTED') }}
                 >Drive to pick up
                 </Button>
               )
             }
+
             {
-              trip !== null && trip.status === 'STARTED'  && trip.status !='CANCELD' && (
+              trip !== null && trip.status === 'STARTED' && (
                 <Button
                   className="Butt"
                   variant="primary"
@@ -90,12 +118,12 @@ function DriverDetail ({ match }) {
                 </Button>
               )
             }
-              
-            
+
+
             {
-              trip !== null && trip.status === 'IN_PROGRESS' && trip.status !='CANCELD' && (
+              trip !== null && trip.status === 'IN_PROGRESS' && (
                 <Button
-                className="Butt"
+                  className="Butt"
                   data-cy='status-button'
                   block
                   variant='success'
@@ -104,9 +132,9 @@ function DriverDetail ({ match }) {
                 </Button>
               )
             }
-          
+
             {
-              trip !== null && !['REQUESTED', 'STARTED', 'IN_PROGRESS','CANCELD'].includes(trip.status) && (
+              trip !== null && !['REQUESTED', 'STARTED', 'IN_PROGRESS'].includes(trip.status) && (
                 <span className='text-center'>Completed</span>
               )
             }

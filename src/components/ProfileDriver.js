@@ -8,7 +8,8 @@ import './Login.css';
 import { Formik } from 'formik';
 import {toast} from 'react-toastify';
 
-function Profile(props) {
+function ProfileDriver(props) {
+  
   const [showFormz, setShowForm] = useState(false);
 
   const showForm = () => {
@@ -49,7 +50,7 @@ function Profile(props) {
   const eaders1 = { 'Content-Type': 'application/json' ,Authorization: `Bearer ${token}` };
 
   React.useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_KEY}/api/Send_cargo/change/${isauto()}`,({headers:eaders1})).then((response) => {
+    axios.get(`${process.env.React_App_wtf}/api/Send_cargo/change/${isauto()}`,({headers:eaders1})).then((response) => {
       setPost(response.data);
     });
   }, []);
@@ -60,22 +61,34 @@ function Profile(props) {
     e.preventDefault();
     const pass = { old_password, new_password };
 
-    fetch(`${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-password/`, {
+    fetch(`${process.env.React_App_wtf}/api/Send_cargo/change-password/`, {
       method: 'PUT',
       headers:  eaders1 ,
       body: JSON.stringify(pass)
       
       
-    })
+    }).then(result => result.json()).then(response => {
+        
+        if(response.code == 400){
+          toast.error(response.message)
+        }
+        else{
+            toast.success(response.message)
+            
+        }
+    });
+    try{
+      setSubmitted(true)
+    }catch{}
 }
 const onSubmit = async (values, actions) => {
-  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-image/${isauto()}`;
+  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-image/${isauto()}`;
   const formData = new FormData();
   formData.append('image', values.image);
   
   try {
     await axios.put(url, formData,{headers:eaders1});
-    setSubmitted(true);
+      setSubmitted(true)
     
   }
   catch (response) {
@@ -86,13 +99,15 @@ const onSubmit = async (values, actions) => {
   }
 };
 const handleSubmit_e = async (values, actions) => {
-  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-email/${isauto()}`;
+  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-email/${isauto()}`;
   const formData = new FormData();
   formData.append('email', values.email);
   
   try {
     await axios.put(url, formData,{headers:eaders1});
-    setSubmitted(true);
+    
+      setSubmitted(true)
+    
     
   }
   catch (response) {
@@ -103,16 +118,20 @@ const handleSubmit_e = async (values, actions) => {
   }
 };
 const handleSubmit_phone = async (values, actions) => {
-  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-phone/${isauto()}`;
+  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-phone/${isauto()}`;
   const formData = new FormData();
   formData.append('phone_number', values.phone_number);
   
   try {
     await axios.put(url, formData,{headers:eaders1});
-    setSubmitted(true);
+    setSubmitted(true)
     
   }
   catch (response) {
+    if(response.message == null){
+      toast.error("x")
+    }
+    
     const data = response.response.data;
     for (const value in data) {
       actions.setFieldError(value, data[value].join(' '));
@@ -120,14 +139,14 @@ const handleSubmit_phone = async (values, actions) => {
   }
 };
 const handleSubmit_password = async (values, actions) => {
-  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-password/`;
+  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-password/`;
   const formData = new FormData();
   formData.append('old_password', values.old_password);
   formData.append('new_password', values.new_password);
   
   try {
     await axios.put(url, formData,{headers:eaders1});
-    setSubmitted(true);
+    setSubmitted(true)
     
   }
   catch (response) {
@@ -137,17 +156,9 @@ const handleSubmit_password = async (values, actions) => {
     }
   }
 };
-
-
-
-function reloadPage() {
-    window.location.reload();
-
-}
 if (isSubmitted) {
-  reloadPage()
+  return <Redirect to='/driver/profile' />
 }
- 
 
   return (
     <div className="container bootstrap snippets bootdey">
@@ -196,6 +207,17 @@ if (isSubmitted) {
                     <tr>        
                       <td>
                         <strong>
+                          <span className="glyphicon glyphicon-bookmark text-primary" /> 
+                          Username                                                
+                        </strong>
+                      </td>
+                      <td className="text-primary">
+                        {post.username}
+                      </td>
+                    </tr>
+                    <tr>        
+                      <td>
+                        <strong>
                           <span className="glyphicon glyphicon-eye-open text-primary" /> 
                           Role                                                
                         </strong>
@@ -223,7 +245,7 @@ if (isSubmitted) {
                         </strong>
                       </td>
                       <td className="text-primary">
-                        {post.phone_number} <br></br><Button onClick={showFormphone}>Change Phone number</Button>  
+                        {post.phone_number} <br></br><Button onClick={showFormphone}>Change Phone_number</Button>  
                       </td>
                     </tr>
                     <tr>        
@@ -480,4 +502,4 @@ if (isSubmitted) {
   );
 }
 
-export default Profile;
+export default ProfileDriver;

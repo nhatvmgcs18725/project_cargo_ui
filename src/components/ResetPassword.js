@@ -10,7 +10,7 @@ function ResetPassword (props)  {
     const [isSubmitted, setSubmitted] = useState(false);
 
   const onSubmit = async (values, actions) => {
-    const url = `http://127.0.0.1:8000/api/password_reset/`;
+    const url = `${process.env.REACT_APP_API_KEY}/api/password_reset/`;
     const formData = new FormData();
     formData.append('email', values.email);
     
@@ -73,7 +73,7 @@ function ResetPassword (props)  {
                         }
                       </Form.Group>
                       <Card.Text></Card.Text>
-                      <Button block type='submit' variant='primary'> Send </Button>
+                      <Button  className="Butt" block type='submit' variant='primary'> Send </Button>
                     </Form>
                   )}
                 </Formik>

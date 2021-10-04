@@ -33,10 +33,10 @@ function App () {
     return window.localStorage.getItem('taxi.auth') !== null;
   });
 
-  const logIn = async (username, password) => {
-    const url = `http://127.0.0.1:8000/api/Login/`;
+  const logIn = async (email, password) => {
+    const url = `${process.env.REACT_APP_API_KEY}/api/Login/`;
     try {
-      const response = await axios.post(url, { username, password });
+      const response = await axios.post(url, { email, password });
       window.localStorage.setItem(
         'taxi.auth', JSON.stringify(response.data)
       );
@@ -163,7 +163,7 @@ function App () {
               <div className="col-lg-8 text-center">
                 <h2 className="text-white mt-0">The shipping cargo application</h2>
                 <hr className="divider divider-light" />
-                <p className="text-white-75 mb-4">Start </p>
+                <p className="text-white-75 mb-4">Start  Line 29:23:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid </p>
                 
               </div>
             </div>
@@ -180,7 +180,9 @@ function App () {
               <div className="col-lg-8 col-xl-6 text-center">
                 <h2 className="mt-0">Let's Get In Touch!</h2>
                 <hr className="divider" />
-                <p className="text-muted mb-5">Ready to start your next project with us? Send us a messages and we will get back to you as soon as possible!</p>
+                <p className="text-muted mb-5">Ready to start your next project with us? Send us a 
+                Line 29:23:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+                messages and we will get back to you as soon as possible!</p>
               </div>
             </div>
             <div className="row gx-4 gx-lg-5 justify-content-center mb-5">

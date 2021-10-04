@@ -10,7 +10,7 @@ export let messages;
 export const connect = () => {
   if (!_socket || _socket.closed) {
     const token = getAccessToken();
-    _socket = webSocket(`ws://localhost:8000/taxi/?token=${token}`);
+    _socket = webSocket(`ws://127.0.0.1:8000/taxi/?token=${token}`);
     messages = _socket.pipe(share());
     messages.subscribe(message => console.log(message));
   }
@@ -35,7 +35,7 @@ export const updateTrip = (trip) => {
 };
 
 export const getTrip = async (id) => {
-  const url = `http://127.0.0.1:8000/api/Send_cargo/${id}/`;
+  const url = `${process.env.REACT_APP_API_KEY }/api/Send_cargo/${id}/`;
   const token = getAccessToken();
   const headers = { Authorization: `Bearer ${token}` };
   try {
@@ -47,7 +47,7 @@ export const getTrip = async (id) => {
 };
 
 export const getTrips = async () => {
-  const url = `http://127.0.0.1:8000/api/Send_cargo/`;
+  const url = `${process.env.REACT_APP_API_KEY }/api/Send_cargo/`;
   const token = getAccessToken();
   const headers = { Authorization: `Bearer ${token}` };
   try {

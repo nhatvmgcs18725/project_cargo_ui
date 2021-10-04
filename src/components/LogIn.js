@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Formik } from 'formik';
 import {
   Alert, Breadcrumb, Button, Card, Col, Form, Row
@@ -7,13 +7,28 @@ import { Link } from 'react-router-dom';
 
 
 function LogIn ({ logIn }) {
+  const [err,setErr] = useState('');
   const onSubmit = async (values, actions) => {
     try {
       const { response, isError } = await logIn(
-        values.username,
+        values.email,
         values.password
       );
       if (isError) {
+
+        if (response.response.data.email =='This field may not be blank.') {
+          setErr('Email can not blank')
+          
+        }
+        if (response.response.data.password =='This field may not be blank.') {
+          setErr('Password can not blank')
+          
+        }
+        if (response.message ==="Request failed with status code 401") {
+          setErr('Please check your password and email agian!!!')
+          
+        }
+        
         const data = response.response.data;
         for (const value in data) {
           actions.setFieldError(value, data[value].join(' '));
@@ -39,7 +54,7 @@ function LogIn ({ logIn }) {
           <Card.Body>
             <Formik
               initialValues={{
-                username: '',
+                email: '',
                 password: ''
               }}
               onSubmit={onSubmit} 
@@ -59,12 +74,12 @@ function LogIn ({ logIn }) {
                     </Alert>
                   }
                   <Form  onSubmit={handleSubmit}>
-                    <Form.Group controlId='username'>
-                      <Form.Label>Username:</Form.Label>
+                    <Form.Group controlId='email'>
+                      <Form.Label>Email</Form.Label>
                       <Form.Control
-                        name='username'
+                        name='email'
                         onChange={handleChange}
-                        value={values.username}
+                        value={values.email}
                       />
                     </Form.Group>
                     <Form.Group controlId='password'>
@@ -76,8 +91,10 @@ function LogIn ({ logIn }) {
                         value={values.password}
                       />
                     </Form.Group>
+                    <Card.Text><a className="err">{err}</a></Card.Text>
                     <Card.Text></Card.Text>
                     <Button
+                      className="Butt"
                       variant="success"
                       block
                       disabled={isSubmitting}

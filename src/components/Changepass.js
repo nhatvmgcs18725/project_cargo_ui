@@ -19,7 +19,7 @@ function Change_pass (props) {
     e.preventDefault();
     const pass = { old_password, new_password };
 
-    fetch(`http://127.0.0.1:8000/api/Send_cargo/change-password/`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-password/`, {
       method: 'PUT',
       headers:  eaders1 ,
       body: JSON.stringify(pass)

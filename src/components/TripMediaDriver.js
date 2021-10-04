@@ -8,7 +8,7 @@ import '../UI/Bt.css';
 
 function TripMediaDriver({ trip, group, otherGroup }) {
   const user = trip[otherGroup];
-  const photoUrl = new URL(user.image, `http://127.0.0.1:8000/media/Img_media/${user.image}`).href;
+  const photoUrl = new URL(user.image, `${process.env.REACT_APP_API_KEY}/media/Img_media/${user.image}`).href;
   const href = group ? `/${group}/${trip.id}` : undefined;
   
 
@@ -29,6 +29,8 @@ function TripMediaDriver({ trip, group, otherGroup }) {
                       <span className="job_post"><strong>Name of consignor:</strong> {user.first_name} {user.last_name}</span>
                       <br />
                       <p> <strong>consignor phone number:  </strong>{user.phone_number}</p>
+                      <p> <strong>Distance:  </strong>{trip.cargo_distance} km</p>
+                      <h4> <p><strong>Price:  </strong>{trip.cargo_price} VND</p></h4>
                       <p> <strong>Status: {trip.status}</strong></p>
                       <div>
                       {

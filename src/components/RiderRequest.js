@@ -10,6 +10,15 @@ import { getUser } from '../services/AuthService';
 import { createTrip } from '../services/TripService';
 import Map from './Map';
 import { toast } from 'react-toastify';
+import Geocode from "react-geocode";
+import { convertDistance, getDistance,getPreciseDistance } from 'geolib';
+import {
+  
+  LoadScript,
+
+  DistanceMatrixService,
+  GoogleMap
+} from '@react-google-maps/api';
 
 
 function RiderRequest (props) {
@@ -17,6 +26,21 @@ function RiderRequest (props) {
 
   const [lat, setLat] = useState(10.781418);
   const [lng, setLng] = useState(106.698321);
+
+  const [la, setLatitude] = useState(10.781418);
+  const [lang, setLang] = useState(106.698321);
+  const [la1, setLatitude1] = useState(10.78238101998759);
+  const [lang1, setLang1] = useState(106.69606188685304);
+  const [distancee , setDistanc] = useState('');
+  const [weight, setWeight] = useState('');
+  const [notee, setNote] = useState('None');
+  const [inpu,setInpu ] = useState('Nhà thờ Đức Bà Sài Gòn, 01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh, Việt Nam');
+  const [inpu1, setInpu1] = useState('Nhà thờ Đức Bà Sài Gòn, 01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh, Việt Nam');
+  
+
+
+
+  Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
 
   useEffect(() => {
     if (window.navigator.geolocation) {
@@ -26,30 +50,67 @@ function RiderRequest (props) {
       });
     }
   }, []);
+  
 
-  const onSubmit = (values, actions) => {
-    const rider = getUser();
-    createTrip({
-      pick_up_address: values.pickUpAddress,
-      drop_off_address: values.dropOffAddress,
-      cargo_weight : values.cargo_weight,
-      cargo_note : values.cargo_note,
-      get_cargo_name : values.get_cargo_name,
-      phone_number_get_cargo: values.phone_number_get_cargo,
-      rider: rider.id
-    });
-    try {
-      setSubmitted(true)
-      
+  
+
+
+  Geocode.fromAddress(inpu).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      setLatitude(lat);
+      setLang(lng);
+    },
+    error => {
+      console.error(error);
     }
-    catch (response) {
-      toast.error(response.status)
-      const data = response.response.data;
-      for (const value in data) {
-        actions.setFieldError(value, data[value].join(' '));
-      }
+  );
+  Geocode.fromAddress(inpu1).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      setLatitude1(lat);
+      setLang1(lng);
+    },
+    error => {
+      console.error(error);
     }
-  };
+  );
+  const Convert_distance = (convertDistance(distancee,'km')).toFixed(2)
+  let a = 0;
+ if(notee === 'Fragile goods'){
+  a=  ((parseFloat(weight) * 3000 * 1.5 * Math.round(Convert_distance))+5000);
+ }
+ else{
+   a=  ((parseFloat(weight) * 3000 * Math.round(Convert_distance))+5000);
+   
+ }
+const b = Math.round(a)
+
+const onSubmit = (values, actions) => {
+  const rider = getUser();
+  createTrip({
+    pick_up_address: values.pickUpAddress,
+    drop_off_address: values.dropOffAddress,
+    cargo_weight : values.cargo_weight,
+    cargo_note : values.cargo_note,
+    get_cargo_name : values.get_cargo_name,
+    phone_number_get_cargo: values.phone_number_get_cargo,
+    cargo_price : b,
+    cargo_distance : Convert_distance,
+    rider: rider.id
+  });
+  try{
+    setSubmitted(true)
+
+  }
+  catch{
+
+  }
+  
+
+};
+
+
 
   if (isSubmitted) {
     return <Redirect to='/rider' />
@@ -95,7 +156,10 @@ function RiderRequest (props) {
                       className={ 'get_cargo_name' in errors ? 'is-invalid' : '' }
                       name='get_cargo_name'
                       onChange={handleChange}
+                      minLength = {2}
+                      pattern='[a-zA-Z ]*$'
                       values={values.get_cargo_name}
+                      
                       required 
                     />
                     {
@@ -126,7 +190,7 @@ function RiderRequest (props) {
                       name='cargo_weight'
                       onChange={handleChange}
                       maxLength={3}
-                      pattern='^\+?1?\d{1,5}$'
+                      pattern='^\d+(\.\d+)*$'
                       values={values.cargo_weight}
                       required 
                     />
@@ -144,7 +208,7 @@ function RiderRequest (props) {
                       onChange={handleChange}
                       value={values.cargo_note}
                     >
-                      <option value='...........'>....................</option>
+                      <option value='None'>....................</option>
                       <option value='Fragile goods'>Fragile goods</option>
                     </Form.Control>
                   </Form.Group>
@@ -155,6 +219,7 @@ function RiderRequest (props) {
                       name='pickUpAddress'
                       onChange={handleChange}
                       values={values.pickUpAddress}
+                      minLength={6}
                       required
                     />
                   </Form.Group>
@@ -165,6 +230,7 @@ function RiderRequest (props) {
                       pickUpAddress={values.pickUpAddress}
                       dropOffAddress={values.dropOffAddress}
                     />
+                    
                   <Form.Group controlId='dropOffAddress'>
                     <Form.Label>Drop off address:</Form.Label>
                     <Form.Control
@@ -172,6 +238,54 @@ function RiderRequest (props) {
                       name='dropOffAddress'
                       onChange={handleChange}
                       values={values.dropOffAddress}
+                      minLength={6}
+                      required
+                      
+                    />
+                  </Form.Group>
+                  
+                  <LoadScript 
+  googleMapsApiKey= 'aaa' //{process.env.React_App_Map_API_KEY}
+  >
+    <GoogleMap>
+    <DistanceMatrixService
+options={{
+         destinations: [{lat : la1, lng : lang1}],
+         origins: [{lat: la, lng : lang}],
+         travelMode: "DRIVING",
+       }}
+callback = {(response) => {try{const distance =  response.rows[0].elements[0].distance.value;setDistanc(distance)}catch{}
+}}
+/>
+</GoogleMap>
+
+
+  </LoadScript>
+
+  {setInpu(values.pickUpAddress),
+                setInpu1(values.dropOffAddress),
+                setNote(values.cargo_note),
+                setWeight(values.cargo_weight)}
+  <Form.Group controlId='distance'>
+                    <Form.Label>Distance:</Form.Label>
+                    <Form.Control
+                      
+                      name='distance'
+                      
+                      value = {Convert_distance}
+                      disabled
+                      
+                    />
+                  </Form.Group>
+                  <Form.Group controlId='price'>
+                    <Form.Label>Price:</Form.Label>
+                    <Form.Control
+                      
+                      name='Price'
+                      
+                      value = {b}
+                      disabled
+                      
                     />
                   </Form.Group>
                   <Card.Text></Card.Text>

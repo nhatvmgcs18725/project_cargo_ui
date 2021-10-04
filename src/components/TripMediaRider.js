@@ -5,7 +5,7 @@ import '../UI/RiDiDe.css';
 
 function TripMedia({ trip, group, otherGroup }) {
   const user = trip[otherGroup];
-  const photoUrl = new URL(user.image, `http://127.0.0.1:8000/media/Img_media/${user.image}`).href;
+  const photoUrl = new URL(user.image, `${process.env.REACT_APP_API_KEY}/media/Img_media/${user.image}`).href;
   const href = group ? `/${group}/${trip.id}` : undefined;
 
   return (
@@ -113,6 +113,28 @@ function TripMedia({ trip, group, otherGroup }) {
                         <h5>From: {trip.pick_up_address} <br></br> To: {trip.drop_off_address}</h5>
                         </td>
                       </tr>
+                      <tr>        
+                        <td>
+                          <strong>
+                            <span className="glyphicon glyphicon-calendar text-primary" />
+                            Distance                                              
+                          </strong>
+                        </td>
+                        <td className="text-primary">
+                        {trip.cargo_distance}  Km
+                        </td>
+                      </tr>
+                      <tr>        
+                        <td>
+                          <strong>
+                            <span className="glyphicon glyphicon-calendar text-primary" />
+                            Price                                            
+                          </strong>
+                        </td>
+                        <td className="text-primary">
+                        <h4>{trip.cargo_price} VND</h4>
+                        </td>
+                      </tr>          
                       <tr>        
                         <td>
                           <strong>

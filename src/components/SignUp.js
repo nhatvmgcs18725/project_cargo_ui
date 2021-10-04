@@ -5,17 +5,18 @@ import {
   Breadcrumb, Button, Card, Col, Form, Row
 } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
+import '../UI/Bt.css';
 
 function SignUp (props) {
   const [isSubmitted, setSubmitted] = useState(false);
+  const [err,setErr] = useState('');
 
   const onSubmit = async (values, actions) => {
-    const url = `http://127.0.0.1:8000/api/Signup/`;
+    const url = `${process.env.REACT_APP_API_KEY}/api/Signup/`;
     const formData = new FormData();
-    formData.append('username', values.username);
     formData.append('email', values.email);
-    formData.append('first_name', values.firstName);
-    formData.append('last_name', values.lastName);
+    formData.append('first_name', values.first_name);
+    formData.append('last_name', values.last_name);
     formData.append('password1', values.password1);
     formData.append('password2', values.password2);
     formData.append('group', values.group);
@@ -26,6 +27,10 @@ function SignUp (props) {
       setSubmitted(true);
     }
     catch (response) {
+      if (response.response.data.non_field_errors =='Password must match!') {
+        setErr('Please check password (Confirm Password must match with Password)!')
+        
+      }
       const data = response.response.data;
       for (const value in data) {
         actions.setFieldError(value, data[value].join(' '));
@@ -51,10 +56,10 @@ function SignUp (props) {
           <Card.Body>
             <Formik
               initialValues={{
-                username: '',
+                
                 email: '',
-                firstName: '',
-                lastName: '',
+                first_name: '',
+                last_name: '',
                 password1: '',
                 password2: '',
                 group: 'rider',
@@ -72,21 +77,7 @@ function SignUp (props) {
                 values
               }) => (
                 <Form validated onSubmit={handleSubmit}>
-                  <Form.Group controlId='username'>
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      className={ 'username' in errors ? 'is-invalid' : '' }
-                      name='username'
-                      minLength={4}
-                      onChange={handleChange}
-                      values={values.username}
-                      required
-                    />
-                    {
-                      'username' in errors &&
-                      <Form.Control.Feedback type='invalid'>{ errors.username }</Form.Control.Feedback>
-                    }
-                  </Form.Group>
+                  
                   <Form.Group controlId='email'>
                     <Form.Label>Email:</Form.Label>
                     <Form.Control
@@ -102,34 +93,34 @@ function SignUp (props) {
                       <Form.Control.Feedback type='invalid'>{ errors.email }</Form.Control.Feedback>
                     }
                   </Form.Group>
-                  <Form.Group controlId='firstName'>
+                  <Form.Group controlId='first_name'>
                     <Form.Label>First name:</Form.Label>
                     <Form.Control
-                      className={ 'firstName' in errors ? 'is-invalid' : '' }
-                      name='firstName'
+                      className={ 'first_name' in errors ? 'is-invalid' : '' }
+                      name='first_name'
                       minLength={2}
                       onChange={handleChange}
-                      values={values.firstName}
+                      values={values.firs_tName}
                       required 
                     />
                     {
-                      'firstName' in errors &&
-                      <Form.Control.Feedback type='invalid'>{ errors.firstName }</Form.Control.Feedback>
+                      'first_name' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.first_name }</Form.Control.Feedback>
                     }
                   </Form.Group>
-                  <Form.Group controlId='lastName'>
+                  <Form.Group controlId='last_name'>
                     <Form.Label>Last name:</Form.Label>
                     <Form.Control
-                      className={ 'lastName' in errors ? 'is-invalid' : '' }
-                      name='lastName'
+                      className={ 'last_name' in errors ? 'is-invalid' : '' }
+                      name='last_name'
                       minLength={2}
                       onChange={handleChange}
-                      values={values.lastName}
+                      values={values.last_name}
                       required 
                     />
                     {
-                      'lastName' in errors &&
-                      <Form.Control.Feedback type='invalid'>{ errors.lastName }</Form.Control.Feedback>
+                      'last_name' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.last_name }</Form.Control.Feedback>
                     }
                   </Form.Group>
                   <Form.Group controlId='password1'>
@@ -140,6 +131,7 @@ function SignUp (props) {
                       onChange={handleChange}
                       type='password'
                       value={values.password1}
+                      minLength={10}
                       required
                     />
                     {
@@ -147,6 +139,9 @@ function SignUp (props) {
                       <Form.Control.Feedback type='invalid'>{ errors.password1 }</Form.Control.Feedback>
                     }
                   </Form.Group>
+
+                  <Card.Text><p className="err">{err}</p></Card.Text>
+
                   <Form.Group controlId='password2'>
                     <Form.Label>Confirm Password:</Form.Label>
                     <Form.Control
@@ -155,6 +150,7 @@ function SignUp (props) {
                       onChange={handleChange}
                       type='password'
                       value={values.password2}
+                      minLength={10}
                       required
                     />
                     {
@@ -186,6 +182,7 @@ function SignUp (props) {
                       name='phone_number'
                       onChange={handleChange}
                       values={values.phone_number}
+                      maxLength ={15}
                       required
                     />
                     {
@@ -211,7 +208,7 @@ function SignUp (props) {
                     }
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary' >Sign up</Button>
+                  <Button className="Butt" block type='submit' variant='primary' >Sign up</Button>
                 </Form>
               )}
             </Formik>

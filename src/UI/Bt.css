@@ -4,3 +4,6 @@
 .Butt1 {
   width: 50%;
 }
+.err {
+  color: rgba(255, 99, 71, 0.8);
+}

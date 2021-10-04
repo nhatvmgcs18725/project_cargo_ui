@@ -6,11 +6,11 @@ import {
 } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 
-const ResetPasswordConfirm = ({match}) =>  {
+function ResetPasswordConfirm (props)  {
     const [isSubmitted, setSubmitted] = useState(false);
 
   const onSubmit = async (values, actions) => {
-    const url = `http://127.0.0.1:8000/api/password_reset/confirm/`;
+    const url = `${process.env.REACT_APP_API_KEY}/api/password_reset/confirm/`;
     const formData = new FormData();
     formData.append('password', values.password);
     formData.append('token', values.token);
@@ -66,7 +66,7 @@ const ResetPasswordConfirm = ({match}) =>  {
                       className={ 'token' in errors ? 'is-invalid' : '' }
                       name='token'
                       onChange={handleChange}
-                      type='password'
+                      type='text'
                       value={values.token}
                       required
                       
@@ -76,6 +76,9 @@ const ResetPasswordConfirm = ({match}) =>  {
                       <Form.Control.Feedback type='invalid'>{ errors.token }</Form.Control.Feedback>
                     }
                   </Form.Group>
+                  <Card.Text><li>Password must contains one digit from 0-9</li>
+                  <li>Must contains at least one lowercase and one upper characters</li>
+                  <li>length at least 10 characters</li></Card.Text>
                   
                   <Form.Group controlId='password'>
                     <Form.Label>password:</Form.Label>
@@ -85,16 +88,17 @@ const ResetPasswordConfirm = ({match}) =>  {
                       onChange={handleChange}
                       type='password'
                       value={values.password}
+                      minLength={10}
                       required
                       
                     />
                     {
-                      'email' in errors &&
+                      'password' in errors &&
                       <Form.Control.Feedback type='invalid'>{ errors.password }</Form.Control.Feedback>
                     }
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary'>Send</Button>
+                  <Button className="Butt"  block type='submit' variant='primary'>Send</Button>
                 </Form>
               )}
             </Formik>

@@ -9,7 +9,16 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { getUser } from '../services/AuthService';
 import { createTrip } from '../services/TripService';
 import Map from './Map';
+import { toast } from 'react-toastify';
+import Geocode from "react-geocode";
+import { convertDistance, getDistance,getPreciseDistance } from 'geolib';
+import {
+  
+  LoadScript,
 
+  DistanceMatrixService,
+  GoogleMap
+} from '@react-google-maps/api';
 
 
 function RiderRequest (props) {
@@ -18,10 +27,25 @@ function RiderRequest (props) {
   const [lat, setLat] = useState(10.781418);
   const [lng, setLng] = useState(106.698321);
 
+  const [la, setLatitude] = useState(10.781418);
+  const [lang, setLang] = useState(106.698321);
+  const [la1, setLatitude1] = useState(10.78238101998759);
+  const [lang1, setLang1] = useState(106.69606188685304);
+  const [distancee , setDistanc] = useState('');
+  const [weight, setWeight] = useState('');
+  const [notee, setNote] = useState('None');
+  const [inpu,setInpu ] = useState('Nhà thờ Đức Bà Sài Gòn, 01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh, Việt Nam');
+  const [inpu1, setInpu1] = useState('Nhà thờ Đức Bà Sài Gòn, 01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh, Việt Nam');
+  
 
   const [alo,setalo] = React.useState(''); 
+  const [alo1,setalo1] = React.useState(''); 
 
+  const [showFormzphone, setShowFormphone] = useState(false);
 
+  const showFormphone = () => {
+    setShowFormphone(!showFormzphone);
+  }
 
  
 
@@ -37,8 +61,16 @@ function RiderRequest (props) {
 
   
 
-
-  
+  const Convert_distance = (convertDistance(distancee,'km')).toFixed(2)
+  let a = 0;
+ if(notee === 'Fragile goods'){
+  a=  ((parseFloat(weight) * 3000 * 1.5 * Math.round(Convert_distance))+5000);
+ }
+ else{
+   a=  ((parseFloat(weight) * 3000 * Math.round(Convert_distance))+5000);
+   
+ }
+const b = Math.round(a)
 
 const onSubmit = (values, actions) => {
   const rider = getUser();
@@ -49,6 +81,7 @@ const onSubmit = (values, actions) => {
     cargo_note : values.cargo_note,
     get_cargo_name : values.get_cargo_name,
     phone_number_get_cargo: values.phone_number_get_cargo,
+    
     rider: rider.id
   });
   try{
@@ -62,8 +95,28 @@ const onSubmit = (values, actions) => {
 
 };
 
-console.warn(alo)
+Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
 
+  Geocode.fromAddress(inpu).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      setLatitude(lat);
+      setLang(lng);
+    },
+    error => {
+      console.error(error);
+    }
+  );
+  Geocode.fromAddress(inpu1).then(
+    response => {
+      const { lat, lng } = response.results[0].geometry.location;
+      setLatitude1(lat);
+      setLang1(lng);
+    },
+    error => {
+      console.error(error);
+    }
+  );
 
   if (isSubmitted) {
     return <Redirect to='/rider' />
@@ -85,12 +138,13 @@ console.warn(alo)
           <Card.Body>
             <Formik
               initialValues={{
-                pickUpAddress: '',
-                dropOffAddress: '',
+                
                 cargo_weight:'',
                 cargo_note : 'None',
                 get_cargo_name:'',
                 phone_number_get_cargo:'',
+                pickUpAddress: '',
+                dropOffAddress: '',
               }}
               onSubmit={onSubmit}
             >
@@ -171,13 +225,12 @@ console.warn(alo)
                       data-cy='pick-up-address'
                       name='pickUpAddress'
                       onChange={handleChange}
-                      minLength={6}
                       values={values.pickUpAddress}
-                      
+                      minLength={6}
                       required
                     />
                   </Form.Group>
-                
+                  
                     
                   <Form.Group controlId='dropOffAddress'>
                     <Form.Label>Drop off address:</Form.Label>
@@ -185,25 +238,73 @@ console.warn(alo)
                       data-cy='drop-off-address'
                       name='dropOffAddress'
                       onChange={handleChange}
-                      minLength={6}
                       values={values.dropOffAddress}
-                      
+                      minLength={6}
                       required
                       
                     />
                   </Form.Group>
-                  <Button className="Butt" block onClick={() => (setalo(values.dropOffAddress))}>Let's Go</Button>
+                  <Button className="Butt" variant='warning'  block onClick={() => showFormphone  (setalo(values.dropOffAddress))+setalo1(values.pickUpAddress) + { once: true }}>Check map</Button>
 
                   <Map
                       lat={lat}
                       lng={lng}
                       zoom={13}
-                      pickUpAddress={values.pickUpAddress}
+                      pickUpAddress={alo1}
                       dropOffAddress={alo}
+                     
+                      
                     />
                   
+                  <LoadScript 
+  googleMapsApiKey= ''  //{process.env.React_App_Map_API_KEY}
+  >
+    <GoogleMap>
+    <DistanceMatrixService
+options={{
+         destinations: [{lat : la1, lng : lang1}],
+         origins: [{lat: la, lng : lang}],
+         travelMode: "DRIVING",
+       }}
+callback = {(response) => {try{const distance =  response.rows[0].elements[0].distance.value;setDistanc(distance)}catch{}
+}}
+/>
+</GoogleMap>
+
+
+  </LoadScript>
+
+  {setInpu(alo1),
+                setInpu1(alo),
+                setNote(values.cargo_note),
+                setWeight(values.cargo_weight)}
+  <Form.Group controlId='distance'>
+                    <Form.Label>Distance:</Form.Label>
+                    <Form.Control
+                      
+                      name='distance'
+                      
+                      value = {Convert_distance}
+                      disabled
+                      
+                      
+                    />
+                  </Form.Group>
+                  <Form.Group controlId='price'>
+                    <Form.Label>Price:</Form.Label>
+                    <Form.Control
+                      
+                      name='Price'
+                      
+                      value = {b}
+                      disabled
+                      
+                    />
+                  </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button className="Butt" block type='submit' variant='primary' disabled={isSubmitting}>Let's Go</Button>
+                  {showFormzphone  && Convert_distance >0 && (
+                  <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's go</Button>
+                  )}
                 </Form>
               )}
             </Formik>

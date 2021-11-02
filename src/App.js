@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Button, Container, Form, Nav, Navbar, Card
+  Button, Container, Nav, Navbar, Card
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
@@ -24,7 +24,7 @@ import './Home.css';
 
 
 import Footer from './UI/Footer';
-import image1 from './asset/xa.png';
+
 
 
 
@@ -65,7 +65,7 @@ function App () {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content />
         <meta name="author" content />
-        <title>Creative - Start Bootstrap Theme</title>
+        <title>Let's Go</title>
         {/* Favicon*/}
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         {/* Bootstrap Icons*/}
@@ -218,13 +218,14 @@ function App () {
               {
                 !isLoggedIn && (
                   <>
+                  
                     <Link
                       id='signUp'
                       className='btn btn-primary'
                       to='/sign-up'
                     >Sign up</Link>
                     <Link
-                      id='logIn'
+                      id='log'
                       className='btn btn-primary'
                       to='/log-in'
                     >Log in</Link>
@@ -256,45 +257,59 @@ function App () {
           {
             isRider() && (
               <Nav className='mr-auto'>
-                <LinkContainer to='/rider/request'>
-                  <Nav.Link>Request a trip</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/rider/history'>
-                <Nav.Link>History</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to='/rider/profile'>
-                <Nav.Link>My Profile</Nav.Link>
-              </LinkContainer>
+                <Link
+                      id='Tripre'
+                      className='btn btn-info' 
+                      to='/rider/request'
+                    >Request a trip</Link>
+                    &ensp;
+                    <Link
+                      id='Hisrid'
+                      className='btn btn-success' 
+                      to='/rider/history'
+                    >My History</Link>
+                    &ensp;
+                    <Link
+                      id='Prorid'
+                      className='btn btn-warning' 
+                      to='/rider/profile'
+                    >My Profile</Link>
+                    &ensp;
+                    
               
-              
+            
               </Nav>
             )
           }
           {
             isDriver() && (
               <Nav className='mr-auto'>
-                
-              <LinkContainer to='/driver/history'>
-                  <Nav.Link>History</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/driver/profile'>
-                <Nav.Link>My Profile</Nav.Link>
-              </LinkContainer>
-                
-                
+              <Link
+                      id='HisDrid'
+                      className='btn btn-success' 
+                      to='/driver/history'
+                    >My History</Link>
+                    &ensp;
+              <Link
+                      id='ProDrid'
+                      className='btn btn-warning' 
+                      to='/driver/profile'
+                    >My Profile</Link>
+                    &ensp;
+              
                 
             </Nav>
             )
           }
           {
             isLoggedIn && (
-              <Form inline className='ml-auto'>
+              <Nav inline className='mr-auto'>
                 <Button
                   type='button'
                   className="btn-danger"
                   onClick={() => logOut()}
                 >Log out</Button>
-              </Form>
+              </Nav>
             )
           }
         </Navbar.Collapse>

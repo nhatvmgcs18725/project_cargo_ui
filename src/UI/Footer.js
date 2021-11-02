@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+
 import "./Footer.css";
 
 function Footer() {
@@ -13,7 +13,7 @@ function Footer() {
           <div className="col">
             <h4>Let's go</h4>
             <h1 className="list-unstyled">
-              <li>342-420-6969</li>
+              <li>1009699669</li>
             </h1>
           </div>
           {/* Column2 */}
@@ -23,6 +23,7 @@ function Footer() {
               <li>Fast</li>
               <li>Professional</li>
               <li>Secure</li>
+              <li></li>
             </ui>
           </div>
         </div>

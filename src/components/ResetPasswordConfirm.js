@@ -9,6 +9,8 @@ import { Link, Redirect } from 'react-router-dom';
 function ResetPasswordConfirm (props)  {
     const [isSubmitted, setSubmitted] = useState(false);
 
+    const [err,setErr] = useState('');
+
   const onSubmit = async (values, actions) => {
     const url = `${process.env.REACT_APP_API_KEY}/api/password_reset/confirm/`;
     const formData = new FormData();
@@ -20,6 +22,9 @@ function ResetPasswordConfirm (props)  {
       setSubmitted(true);
     }
     catch (response) {
+      if(response.response.data.detail==='Not found.'){
+        setErr('Invalid key please check again')
+      }
       const data = response.response.data;
       for (const value in data) {
         actions.setFieldError(value, data[value].join(' '));
@@ -60,6 +65,7 @@ function ResetPasswordConfirm (props)  {
                 values
               }) => (
                 <Form  validated onSubmit={handleSubmit}>
+                  <Card.Text>Please check your email to get key to reset password</Card.Text>
                     <Form.Group controlId='token'>
                     <Form.Label>key to reset password:</Form.Label>
                     <Form.Control
@@ -76,12 +82,13 @@ function ResetPasswordConfirm (props)  {
                       <Form.Control.Feedback type='invalid'>{ errors.token }</Form.Control.Feedback>
                     }
                   </Form.Group>
+                  <Card.Text><p className="err">{err}</p></Card.Text>
                   <Card.Text><li>Password must contains one digit from 0-9</li>
                   <li>Must contains at least one lowercase and one upper characters</li>
                   <li>length at least 10 characters</li></Card.Text>
                   
                   <Form.Group controlId='password'>
-                    <Form.Label>password:</Form.Label>
+                    <Form.Label>New password:</Form.Label>
                     <Form.Control
                       className={ 'password' in errors ? 'is-invalid' : '' }
                       name='password'

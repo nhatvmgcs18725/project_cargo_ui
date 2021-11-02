@@ -27,7 +27,7 @@ function SignUp (props) {
       setSubmitted(true);
     }
     catch (response) {
-      if (response.response.data.non_field_errors =='Password must match!') {
+      if (response.response.data.non_field_errors ==='Password must match!') {
         setErr('Please check password (Confirm Password must match with Password)!')
         
       }
@@ -85,7 +85,7 @@ function SignUp (props) {
                       name='email'
                       onChange={handleChange}
                       required 
-                      values={values.email}
+                      values={values.email = values.email.toLowerCase()}
                       
                     />
                     {
@@ -200,7 +200,7 @@ function SignUp (props) {
                         setFieldValue('image', event.currentTarget.files[0]);
                       }}
                       type='file'
-                      required
+                      
                     />
                     {
                       'image' in errors &&
@@ -215,10 +215,10 @@ function SignUp (props) {
           </Card.Body>
           <p className='mt-3 text-center'>
             Already have an account? <Link to='/log-in'>Log in!</Link>
-          </p>
-          <p className='mt-3 text-center'>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Forgot password? <Link to='/reset-password'>Reset password!</Link>
           </p>
+         
         </Card>
       </Col>
     </Row>

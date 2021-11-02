@@ -25,7 +25,7 @@ function Map (props) {
 
   return (
     <LoadScript
-      googleMapsApiKey= 'aa'//{process.env.React_App_Map_API_KEY}
+      googleMapsApiKey= 'AIzaSyCysQ8KvcKT4UIKs3CNv3dU3fI59sKfCXY' //{process.env.React_App_Map_API_KEY}
     >
       <GoogleMap
         center={{

@@ -55,7 +55,7 @@ function RiderDashboard (props) {
     if (trip.status === 'STARTED') {
       toast.success(`Driver ${trip.driver.first_name} is coming to Send your cargo.`);
     } else if (trip.status === 'IN_PROGRESS') {
-      toast.success(`Driver ${trip.driver.first_name} is headed to your destination.`);
+      toast.warning(`Driver ${trip.driver.first_name} is headed to your destination.`);
     } else if (trip.status === 'COMPLETED') {
       toast.success(`Driver ${trip.driver.first_name} has dropped cargo off.`);
     }

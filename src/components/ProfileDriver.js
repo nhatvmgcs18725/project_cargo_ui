@@ -50,7 +50,7 @@ function ProfileDriver(props) {
   const eaders1 = { 'Content-Type': 'application/json' ,Authorization: `Bearer ${token}` };
 
   React.useEffect(() => {
-    axios.get(`${process.env.React_App_wtf}/api/Send_cargo/change/${isauto()}`,({headers:eaders1})).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_KEY}/api/Send_cargo/change/${isauto()}`,({headers:eaders1})).then((response) => {
       setPost(response.data);
     });
   }, []);
@@ -61,7 +61,7 @@ function ProfileDriver(props) {
     e.preventDefault();
     const pass = { old_password, new_password };
 
-    fetch(`${process.env.React_App_wtf}/api/Send_cargo/change-password/`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-password/`, {
       method: 'PUT',
       headers:  eaders1 ,
       body: JSON.stringify(pass)
@@ -82,7 +82,7 @@ function ProfileDriver(props) {
     }catch{}
 }
 const onSubmit = async (values, actions) => {
-  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-image/${isauto()}`;
+  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-image/${isauto()}`;
   const formData = new FormData();
   formData.append('image', values.image);
   
@@ -99,7 +99,7 @@ const onSubmit = async (values, actions) => {
   }
 };
 const handleSubmit_e = async (values, actions) => {
-  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-email/${isauto()}`;
+  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-email/${isauto()}`;
   const formData = new FormData();
   formData.append('email', values.email);
   
@@ -118,7 +118,7 @@ const handleSubmit_e = async (values, actions) => {
   }
 };
 const handleSubmit_phone = async (values, actions) => {
-  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-phone/${isauto()}`;
+  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-phone/${isauto()}`;
   const formData = new FormData();
   formData.append('phone_number', values.phone_number);
   
@@ -139,7 +139,7 @@ const handleSubmit_phone = async (values, actions) => {
   }
 };
 const handleSubmit_password = async (values, actions) => {
-  const url = `${process.env.React_App_wtf}/api/Send_cargo/change-password/`;
+  const url = `${process.env.REACT_APP_API_KEY}/api/Send_cargo/change-password/`;
   const formData = new FormData();
   formData.append('old_password', values.old_password);
   formData.append('new_password', values.new_password);

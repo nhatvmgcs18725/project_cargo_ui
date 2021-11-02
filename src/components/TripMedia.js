@@ -127,28 +127,7 @@ function TripMedia ({ trip, group, otherGroup }) {
                       <h5>From: {trip.pick_up_address} <br></br> To: {trip.drop_off_address}</h5>
                       </td>
                     </tr>
-                    <tr>        
-                        <td>
-                          <strong>
-                            <span className="glyphicon glyphicon-calendar text-primary" />
-                            Distance                                              
-                          </strong>
-                        </td>
-                        <td className="text-primary">
-                        {trip.cargo_distance}  Km
-                        </td>
-                      </tr>
-                      <tr>        
-                        <td>
-                          <strong>
-                            <span className="glyphicon glyphicon-calendar text-primary" />
-                            Price                                            
-                          </strong>
-                        </td>
-                        <td className="text-primary">
-                        <h4>{trip.cargo_price} VND</h4>
-                        </td>
-                      </tr>         
+                    
                     <tr>        
                       <td>
                         <strong>
@@ -168,13 +147,6 @@ function TripMedia ({ trip, group, otherGroup }) {
         </div>
       </div>
       
-                  <Map
-                    lat={lat}
-                    lng={lng}
-                    zoom={13}
-                    pickUpAddress={trip.pick_up_address}
-                    dropOffAddress={trip.drop_off_address}
-                  />
   
     </div>
   );

@@ -10,7 +10,7 @@ export let messages;
 export const connect = () => {
   if (!_socket || _socket.closed) {
     const token = getAccessToken();
-    _socket = webSocket(`ws://127.0.0.1:8000/taxi/?token=${token}`);
+    _socket = webSocket(`ws://${process.env.React_App_API_KEY_SK}/taxi/?token=${token}`);
     messages = _socket.pipe(share());
     messages.subscribe(message => console.log(message));
   }

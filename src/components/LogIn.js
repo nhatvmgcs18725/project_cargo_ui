@@ -16,11 +16,11 @@ function LogIn ({ logIn }) {
       );
       if (isError) {
 
-        if (response.response.data.email =='This field may not be blank.') {
+        if (response.response.data.email ==='This field may not be blank.') {
           setErr('Email can not blank')
           
         }
-        if (response.response.data.password =='This field may not be blank.') {
+        if (response.response.data.password ==='This field may not be blank.') {
           setErr('Password can not blank')
           
         }
@@ -79,7 +79,7 @@ function LogIn ({ logIn }) {
                       <Form.Control
                         name='email'
                         onChange={handleChange}
-                        value={values.email}
+                        values={values.email = values.email.toLowerCase()}
                       />
                     </Form.Group>
                     <Form.Group controlId='password'>

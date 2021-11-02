@@ -20,7 +20,7 @@ function RiderRequest (props) {
 
 
   const [alo,setalo] = React.useState(''); 
-
+  const [alo1,setalo1] = React.useState(''); 
 
 
  
@@ -192,18 +192,21 @@ console.warn(alo)
                       
                     />
                   </Form.Group>
-                  <Button className="Butt" block onClick={() => (setalo(values.dropOffAddress))}>Let's Go</Button>
+                  <Card.Text></Card.Text>
+                  <Button className="Butt" variant='warning'  block onClick={() => (setalo(values.dropOffAddress))+setalo1(values.pickUpAddress) + { once: true }}>Check map</Button>
 
                   <Map
                       lat={lat}
                       lng={lng}
                       zoom={13}
-                      pickUpAddress={values.pickUpAddress}
+                      pickUpAddress={alo1}
                       dropOffAddress={alo}
+                  
+                      
                     />
                   
                   <Card.Text></Card.Text>
-                  <Button className="Butt" block type='submit' variant='primary' disabled={isSubmitting}>Let's Go</Button>
+                  <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's Go</Button>
                 </Form>
               )}
             </Formik>

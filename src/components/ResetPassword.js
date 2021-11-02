@@ -64,7 +64,7 @@ function ResetPassword (props)  {
                           name='email'
                           onChange={handleChange}
                           required
-                          values={values.email}
+                          values={values.email = values.email.toLowerCase()}
                           
                         />
                         {
@@ -73,7 +73,7 @@ function ResetPassword (props)  {
                         }
                       </Form.Group>
                       <Card.Text></Card.Text>
-                      <Button  className="Butt" block type='submit' variant='primary'> Send </Button>
+                      <Button  className="Butt" block type='submit' variant='primary'> Send key reset password to your email </Button>
                     </Form>
                   )}
                 </Formik>

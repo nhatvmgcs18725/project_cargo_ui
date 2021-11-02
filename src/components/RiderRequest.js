@@ -38,9 +38,16 @@ function RiderRequest (props) {
   const [inpu1, setInpu1] = useState('Nhà thờ Đức Bà Sài Gòn, 01 Công xã Paris, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh, Việt Nam');
   
 
+  const [alo,setalo] = React.useState(''); 
+  const [alo1,setalo1] = React.useState(''); 
 
+  const [showFormzphone, setShowFormphone] = useState(false);
 
-  Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
+  const showFormphone = () => {
+    setShowFormphone(!showFormzphone);
+  }
+
+ 
 
   useEffect(() => {
     if (window.navigator.geolocation) {
@@ -54,6 +61,43 @@ function RiderRequest (props) {
 
   
 
+  const Convert_distance = (convertDistance(distancee,'km')).toFixed(2)
+  let a = 0;
+ if(notee === 'Fragile goods'){
+  a=  ((parseFloat(weight) * 3000 * 1.5 * Math.round(Convert_distance))+5000);
+ }
+ else{
+   a=  ((parseFloat(weight) * 3000 * Math.round(Convert_distance))+5000);
+   
+ }
+const b = Math.round(a)
+
+const onSubmit = (values, actions) => {
+  const rider = getUser();
+  createTrip({
+    pick_up_address: values.pickUpAddress,
+    drop_off_address: values.dropOffAddress,
+    cargo_weight : values.cargo_weight,
+    cargo_note : values.cargo_note,
+    get_cargo_name : values.get_cargo_name,
+    phone_number_get_cargo: values.phone_number_get_cargo,
+    cargo_price : '10',
+    cargo_distance : 1,
+    
+    rider: rider.id
+  });
+  try{
+    setSubmitted(true)
+
+  }
+  catch{
+
+  }
+  
+
+};
+
+Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
 
   Geocode.fromAddress(inpu).then(
     response => {
@@ -75,42 +119,6 @@ function RiderRequest (props) {
       console.error(error);
     }
   );
-  const Convert_distance = (convertDistance(distancee,'km')).toFixed(2)
-  let a = 0;
- if(notee === 'Fragile goods'){
-  a=  ((parseFloat(weight) * 3000 * 1.5 * Math.round(Convert_distance))+5000);
- }
- else{
-   a=  ((parseFloat(weight) * 3000 * Math.round(Convert_distance))+5000);
-   
- }
-const b = Math.round(a)
-
-const onSubmit = (values, actions) => {
-  const rider = getUser();
-  createTrip({
-    pick_up_address: values.pickUpAddress,
-    drop_off_address: values.dropOffAddress,
-    cargo_weight : values.cargo_weight,
-    cargo_note : values.cargo_note,
-    get_cargo_name : values.get_cargo_name,
-    phone_number_get_cargo: values.phone_number_get_cargo,
-    cargo_price : b,
-    cargo_distance : Convert_distance,
-    rider: rider.id
-  });
-  try{
-    setSubmitted(true)
-
-  }
-  catch{
-
-  }
-  
-
-};
-
-
 
   if (isSubmitted) {
     return <Redirect to='/rider' />
@@ -132,12 +140,13 @@ const onSubmit = (values, actions) => {
           <Card.Body>
             <Formik
               initialValues={{
-                pickUpAddress: '',
-                dropOffAddress: '',
+                
                 cargo_weight:'',
                 cargo_note : 'None',
                 get_cargo_name:'',
                 phone_number_get_cargo:'',
+                pickUpAddress: '',
+                dropOffAddress: '',
               }}
               onSubmit={onSubmit}
             >
@@ -223,13 +232,7 @@ const onSubmit = (values, actions) => {
                       required
                     />
                   </Form.Group>
-                  <Map
-                      lat={lat}
-                      lng={lng}
-                      zoom={13}
-                      pickUpAddress={values.pickUpAddress}
-                      dropOffAddress={values.dropOffAddress}
-                    />
+                  
                     
                   <Form.Group controlId='dropOffAddress'>
                     <Form.Label>Drop off address:</Form.Label>
@@ -243,9 +246,20 @@ const onSubmit = (values, actions) => {
                       
                     />
                   </Form.Group>
+                  <Button className="Butt" variant='warning'  block onClick={() => showFormphone  (setalo(values.dropOffAddress))+setalo1(values.pickUpAddress) + { once: true }}>Check map</Button>
+
+                  <Map
+                      lat={lat}
+                      lng={lng}
+                      zoom={13}
+                      pickUpAddress={alo1}
+                      dropOffAddress={alo}
+                     
+                      
+                    />
                   
                   <LoadScript 
-  googleMapsApiKey= 'aaa' //{process.env.React_App_Map_API_KEY}
+  googleMapsApiKey= ''  //{process.env.React_App_Map_API_KEY}
   >
     <GoogleMap>
     <DistanceMatrixService
@@ -262,8 +276,8 @@ callback = {(response) => {try{const distance =  response.rows[0].elements[0].di
 
   </LoadScript>
 
-  {setInpu(values.pickUpAddress),
-                setInpu1(values.dropOffAddress),
+  {setInpu(alo1),
+                setInpu1(alo),
                 setNote(values.cargo_note),
                 setWeight(values.cargo_weight)}
   <Form.Group controlId='distance'>
@@ -274,6 +288,7 @@ callback = {(response) => {try{const distance =  response.rows[0].elements[0].di
                       
                       value = {Convert_distance}
                       disabled
+                      
                       
                     />
                   </Form.Group>
@@ -289,7 +304,9 @@ callback = {(response) => {try{const distance =  response.rows[0].elements[0].di
                     />
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button className="Butt" block type='submit' variant='primary' disabled={isSubmitting}>Submit</Button>
+                  {showFormzphone   && (
+                  <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's go</Button>
+                  )}
                 </Form>
               )}
             </Formik>

@@ -5,8 +5,11 @@ import { Image } from 'react-bootstrap';
 import { getAccessToken,getUser } from '../services/AuthService';
 import axios from "axios";
 import './Login.css';
+
 import { Formik } from 'formik';
 import {toast} from 'react-toastify';
+
+import '../UI/Bt.css';
 
 function Profile(props) {
   const [showFormz, setShowForm] = useState(false);
@@ -234,7 +237,7 @@ if (isSubmitted) {
                         </strong>
                       </td>
                       <td className="text-primary">
-                      <Button onClick={showForm}>Change password</Button>
+                      <Button  onClick={showForm}>Change password</Button>
                       </td>
                     </tr>
                     <tr>        
@@ -251,6 +254,108 @@ if (isSubmitted) {
                   </tbody>
                 </table>
                 
+                {showFormzemail && (
+      <div>
+         <Card className='mb-3' bg='light' border='secondary'>
+        <Card.Header>
+      <Breadcrumb>
+          
+          <Breadcrumb.Item active>Change email</Breadcrumb.Item>
+        </Breadcrumb>
+        </Card.Header>
+        <Card.Body>
+        <Formik
+              initialValues={{
+                email: '',
+                
+              }}
+              onSubmit={handleSubmit_e}
+            >
+              {({
+                errors,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                setFieldValue,
+                values
+              }) => (
+                <Form validated onSubmit={handleSubmit}>
+                  <Form.Group controlId='email'>
+                    <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                      className={ 'email' in errors ? 'is-invalid' : '' }
+                      name='email'
+                      onChange={handleChange}
+                      required 
+                      values={values.email = values.email.toLowerCase()}
+                      
+                    />
+                    {
+                      'email' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.email }</Form.Control.Feedback>
+                    }
+                  </Form.Group>
+                  
+                  <Card.Text></Card.Text>
+                  <Button block className ='Butt' type='submit' variant='success' >Save Change</Button>
+                </Form>
+              )}
+            </Formik>
+</Card.Body>
+</Card>
+      </div>
+    )}
+    {showFormzphone && (
+      <div>
+         <Card className='mb-3' bg='light' border='secondary'>
+        <Card.Header>
+      <Breadcrumb>
+          
+          <Breadcrumb.Item active>Change Phone_number</Breadcrumb.Item>
+        </Breadcrumb>
+        </Card.Header>
+        <Card.Body>
+        <Formik
+              initialValues={{
+                phone_number: '',
+                
+              }}
+              onSubmit={handleSubmit_phone}
+            >
+              {({
+                errors,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                setFieldValue,
+                values
+              }) => (
+                <Form validated onSubmit={handleSubmit}>
+                  <Form.Group controlId='phone_number'>
+                    <Form.Label>Phone Number:</Form.Label>
+                    <Form.Control
+                      className={ 'phone_number' in errors ? 'is-invalid' : '' }
+                      name='phone_number'
+                      onChange={handleChange}
+                      required 
+                      values={values.phone_number}
+                      
+                    />
+                    {
+                      'phone_number' in errors &&
+                      <Form.Control.Feedback type='invalid'>{ errors.phone_number }</Form.Control.Feedback>
+                    }
+                  </Form.Group>
+                  
+                  <Card.Text></Card.Text>
+                  <Button block  className ='Butt' type='submit' variant='success' >Save Change</Button>
+                </Form>
+              )}
+            </Formik>
+</Card.Body>
+</Card>
+      </div>
+    )}
                 
                 {showFormz && (
        <div>
@@ -312,7 +417,7 @@ if (isSubmitted) {
                   </Form.Group>
               
                   <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary' >Save Change</Button>
+                  <Button block className ='Butt' type='submit' variant='success' >Save Change</Button>
                 </Form>
               )}
             </Formik>
@@ -320,108 +425,6 @@ if (isSubmitted) {
 </Card>
        </div>
        
-    )}
-    {showFormzemail && (
-      <div>
-         <Card className='mb-3' bg='light' border='secondary'>
-        <Card.Header>
-      <Breadcrumb>
-          
-          <Breadcrumb.Item active>Change email</Breadcrumb.Item>
-        </Breadcrumb>
-        </Card.Header>
-        <Card.Body>
-        <Formik
-              initialValues={{
-                email: '',
-                
-              }}
-              onSubmit={handleSubmit_e}
-            >
-              {({
-                errors,
-                handleChange,
-                handleSubmit,
-                isSubmitting,
-                setFieldValue,
-                values
-              }) => (
-                <Form validated onSubmit={handleSubmit}>
-                  <Form.Group controlId='email'>
-                    <Form.Label>Email:</Form.Label>
-                    <Form.Control
-                      className={ 'email' in errors ? 'is-invalid' : '' }
-                      name='email'
-                      onChange={handleChange}
-                      required 
-                      values={values.email}
-                      
-                    />
-                    {
-                      'email' in errors &&
-                      <Form.Control.Feedback type='invalid'>{ errors.email }</Form.Control.Feedback>
-                    }
-                  </Form.Group>
-                  
-                  <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary' >Save Change</Button>
-                </Form>
-              )}
-            </Formik>
-</Card.Body>
-</Card>
-      </div>
-    )}
-    {showFormzphone && (
-      <div>
-         <Card className='mb-3' bg='light' border='secondary'>
-        <Card.Header>
-      <Breadcrumb>
-          
-          <Breadcrumb.Item active>Change Phone_number</Breadcrumb.Item>
-        </Breadcrumb>
-        </Card.Header>
-        <Card.Body>
-        <Formik
-              initialValues={{
-                phone_number: '',
-                
-              }}
-              onSubmit={handleSubmit_phone}
-            >
-              {({
-                errors,
-                handleChange,
-                handleSubmit,
-                isSubmitting,
-                setFieldValue,
-                values
-              }) => (
-                <Form validated onSubmit={handleSubmit}>
-                  <Form.Group controlId='phone_number'>
-                    <Form.Label>Phone Number:</Form.Label>
-                    <Form.Control
-                      className={ 'phone_number' in errors ? 'is-invalid' : '' }
-                      name='phone_number'
-                      onChange={handleChange}
-                      required 
-                      values={values.phone_number}
-                      
-                    />
-                    {
-                      'phone_number' in errors &&
-                      <Form.Control.Feedback type='invalid'>{ errors.phone_number }</Form.Control.Feedback>
-                    }
-                  </Form.Group>
-                  
-                  <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary' >Save Change</Button>
-                </Form>
-              )}
-            </Formik>
-</Card.Body>
-</Card>
-      </div>
     )}
     {showFormzimage && (
      
@@ -463,7 +466,7 @@ if (isSubmitted) {
                     }
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  <Button block type='submit' variant='primary'>Save Change</Button>
+                  <Button block className ='Butt' type='submit' variant='success'>Save Change</Button>
                 </Form>
               )}
             </Formik>

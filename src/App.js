@@ -34,7 +34,7 @@ function App () {
   });
 
   const logIn = async (email, password) => {
-    const url = `${process.env.REACT_APP_API_KEY}/api/Login/`;
+    const url = `https://letsgoo-backend.herokuapp.com/api/Login/`;
     try {
       const response = await axios.post(url, { email, password });
       window.localStorage.setItem(

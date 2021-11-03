@@ -95,7 +95,9 @@ function ResetPasswordConfirm (props)  {
                       onChange={handleChange}
                       type='password'
                       value={values.password}
+                      pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'
                       minLength={10}
+                      
                       required
                       
                     />

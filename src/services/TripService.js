@@ -10,7 +10,7 @@ export let messages;
 export const connect = () => {
   if (!_socket || _socket.closed) {
     const token = getAccessToken();
-    _socket = webSocket(`wss://letsgoo-backend.herokuapp.com/taxi/?token=${token}`);
+    _socket = webSocket(`wss://letgo-admin-backend.herokuapp.com/taxi/?token=${token}`);
     messages = _socket.pipe(share());
     messages.subscribe(message => console.log(message));
   }

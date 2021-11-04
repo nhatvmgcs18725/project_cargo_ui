@@ -163,7 +163,7 @@ function App () {
               <div className="col-lg-8 text-center">
                 <h2 className="text-white mt-0">The shipping cargo application</h2>
                 <hr className="divider divider-light" />
-                <p className="text-white-75 mb-4">Start  ss The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid </p>
+                <p className="text-white-75 mb-4">Start The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid </p>
                 
               </div>
             </div>

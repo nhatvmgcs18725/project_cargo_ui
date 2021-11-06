@@ -1,9 +1,25 @@
-.Butt {
-  width: 100%;
-}
 .Butt1 {
   width: 50%;
 }
 .err {
   color: rgba(255, 99, 71, 0.8);
+}
+.Butt {
+  width: 100%;
+}
+@media (min-width: 1281px) {
+  .Butt {
+    width: 50%;
+    margin: auto !important;
+    display: block !important;
+    padding: 5px 10px !important;
+    border-radius: 10px !important;
+  }
+
+  .taget {
+    margin: auto;
+    display: block !important;
+
+    width: 60%;
+  }
 }

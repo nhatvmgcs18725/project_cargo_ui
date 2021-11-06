@@ -30,6 +30,9 @@ function TripMediaRiderH({ trip, group, otherGroup }) {
                       
                       <p> <strong>Name of Consignee:   </strong>{trip.get_cargo_name} </p>
                       
+                      <p> <strong>Distance:  </strong>{trip.cargo_distance} km</p>
+                      <h4> <p><strong>Price:  </strong>{trip.cargo_price} VND</p></h4>
+                      
 
                       <p> <strong>Status: {trip.status}</strong></p>
                       <p> <strong>Date: {trip.update_work}</strong></p>

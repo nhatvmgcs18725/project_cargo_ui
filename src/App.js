@@ -88,8 +88,8 @@ function App () {
             <button className="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ms-auto my-2 my-lg-0">
-                <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
-                <li className="nav-item"><a className="nav-link" href="#contact">Contact</a></li>
+                <li className="nav-item"><a className="nav-link" href="#about">Contact</a></li>
+                <li className="nav-item"><a className="nav-link" href="#contact">About</a></li>
                 <li className="nav-item"><a className="nav-link" href="/sign-up">Sign up</a></li>
                 <li className="nav-item"><a className="nav-link" href="/log-in">Login</a></li>
               </ul>
@@ -163,7 +163,7 @@ function App () {
               <div className="col-lg-8 text-center">
                 <h2 className="text-white mt-0">The shipping cargo application</h2>
                 <hr className="divider divider-light" />
-                <p className="text-white-75 mb-4">Start The hre attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid </p>
+                <p className="text-white-75 mb-4">  This project I for research and learning. If you have any questions, please send the email to alotestingalone@gmail.com, and I will reply as quickly as possible. Thank you!</p>
                 
               </div>
             </div>
@@ -180,9 +180,7 @@ function App () {
               <div className="col-lg-8 col-xl-6 text-center">
                 <h2 className="mt-0">Let's Get In Touch!</h2>
                 <hr className="divider" />
-                <p className="text-muted mb-5">Ready to start your next project with us? Send us a 
-                Line 29:23:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
-                messages and we will get back to you as soon as possible!</p>
+                <p className="text-muted mb-5">I want to design and make the product of web applications useful in daily life. Especially during the coronavirus pandemic, people have to stay at home by doing lockdown. So, I create a web application to handle the problem of delivering cargo for people. They can use my web application to send their goods without going out to the home, which will keep them safe.</p>
               </div>
             </div>
             <div className="row gx-4 gx-lg-5 justify-content-center mb-5">

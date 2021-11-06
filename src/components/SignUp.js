@@ -27,7 +27,7 @@ function SignUp (props) {
       setSubmitted(true);
     }
     catch (response) {
-      if (response.response.data.non_field_errors ==='Password must match!') {
+      if (response.response.data.non_field_errors =='Password must match!') {
         setErr('Please check password (Confirm Password must match with Password)!')
         
       }
@@ -45,13 +45,13 @@ function SignUp (props) {
   return (
     <Row>
       <Col lg={12}>
-        <Card>
+        <Card className='taget'>
         <Breadcrumb>
           <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
           <Breadcrumb.Item active>Sign up</Breadcrumb.Item>
         </Breadcrumb>
         </Card>
-        <Card className='mb-2' bg = 'light' border="secondary">
+        <Card className='taget' bg = 'light' border="secondary">
           <Card.Header>Sign up</Card.Header>
           <Card.Body>
             <Formik
@@ -86,6 +86,7 @@ function SignUp (props) {
                       onChange={handleChange}
                       required 
                       values={values.email = values.email.toLowerCase()}
+                      size = "sm"
                       
                     />
                     {
@@ -102,6 +103,7 @@ function SignUp (props) {
                       onChange={handleChange}
                       values={values.firs_tName}
                       required 
+                      size = "sm"
                     />
                     {
                       'first_name' in errors &&
@@ -117,6 +119,7 @@ function SignUp (props) {
                       onChange={handleChange}
                       values={values.last_name}
                       required 
+                      size = "sm"
                     />
                     {
                       'last_name' in errors &&
@@ -133,6 +136,7 @@ function SignUp (props) {
                       value={values.password1}
                       minLength={10}
                       required
+                      size = "sm"
                     />
                     {
                       'password1' in errors &&
@@ -152,6 +156,7 @@ function SignUp (props) {
                       value={values.password2}
                       minLength={10}
                       required
+                      size ="sm"
                     />
                     {
                       'password2' in errors &&
@@ -166,6 +171,7 @@ function SignUp (props) {
                       name='group'
                       onChange={handleChange}
                       value={values.group}
+                      size ="sm"
                     >
                       <option value='rider'>Rider</option>
                       <option value='driver'>Driver</option>
@@ -184,6 +190,7 @@ function SignUp (props) {
                       values={values.phone_number}
                       maxLength ={15}
                       required
+                      size ="sm"
                     />
                     {
                       'phone_number' in errors &&
@@ -213,9 +220,9 @@ function SignUp (props) {
               )}
             </Formik>
           </Card.Body>
-          <p className='mt-3 text-center'>
+          <p className='mt-2 text-center'>
             Already have an account? <Link to='/log-in'>Log in!</Link>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Forgot password? <Link to='/reset-password'>Reset password!</Link>
           </p>
          

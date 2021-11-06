@@ -19,7 +19,7 @@ import {
   DistanceMatrixService,
   GoogleMap
 } from '@react-google-maps/api';
-
+require('dotenv').config();
 
 function RiderRequest (props) {
   const [isSubmitted, setSubmitted] = useState(false);
@@ -97,7 +97,9 @@ const onSubmit = (values, actions) => {
 
 };
 
-Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
+const mapne = process.env.REACT_APP_API_KEY_MAP;
+
+Geocode.setApiKey(mapne); //process.env.React_App_Map_API_KEY
 
   Geocode.fromAddress(inpu).then(
     response => {
@@ -246,8 +248,9 @@ Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
                       
                     />
                   </Form.Group>
+                  <Card.Text></Card.Text>
                   <Button className="Butt" variant='warning'  block onClick={() => showFormphone  (setalo(values.dropOffAddress))+setalo1(values.pickUpAddress) + { once: true }}>Check map</Button>
-
+                  <Card.Text></Card.Text>
                   <Map
                       lat={lat}
                       lng={lng}
@@ -259,7 +262,7 @@ Geocode.setApiKey(''); //process.env.React_App_Map_API_KEY
                     />
                   
                   <LoadScript 
-  googleMapsApiKey= ''  //{process.env.React_App_Map_API_KEY}
+  googleMapsApiKey= {mapne}  //{process.env.React_App_Map_API_KEY}
   >
     <GoogleMap>
     <DistanceMatrixService
@@ -304,7 +307,7 @@ callback = {(response) => {try{const distance =  response.rows[0].elements[0].di
                     />
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  {showFormzphone   && (
+                  {showFormzphone   && Convert_distance > 0 && (
                   <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's go</Button>
                   )}
                 </Form>

@@ -181,7 +181,7 @@ if (isSubmitted) {
               </ul>
             </div>
             <div className="col-md-6">
-              <strong>Information</strong><br />
+              <strong>Profile Information</strong><br />
               <div className="table-responsive">
                 <table className="table table-user-information">
                   <tbody>

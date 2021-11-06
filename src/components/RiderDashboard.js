@@ -75,7 +75,7 @@ function RiderDashboard (props) {
         </Card>
 
         <TripCardRiderH
-          title='Current Trip'
+          title='Current Trip To send'
           trips={getCurrentTrips()}
           group='rider'
           otherGroup='driver'

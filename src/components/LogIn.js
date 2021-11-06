@@ -16,11 +16,11 @@ function LogIn ({ logIn }) {
       );
       if (isError) {
 
-        if (response.response.data.email ==='This field may not be blank.') {
+        if (response.response.data.email =='This field may not be blank.') {
           setErr('Email can not blank')
           
         }
-        if (response.response.data.password ==='This field may not be blank.') {
+        if (response.response.data.password =='This field may not be blank.') {
           setErr('Password can not blank')
           
         }
@@ -43,13 +43,13 @@ function LogIn ({ logIn }) {
   return (
     <Row>
       <Col lg={12}>
-        <Card>
+        <Card className='taget'>
         <Breadcrumb>
           <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
           <Breadcrumb.Item active>Log in</Breadcrumb.Item>
         </Breadcrumb>
         </Card>
-        <Card border="secondary" >
+        <Card className='taget' border="secondary" >
           <Card.Header>Log in</Card.Header>
           <Card.Body>
             <Formik

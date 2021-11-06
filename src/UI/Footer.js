@@ -18,11 +18,21 @@ function Footer() {
           </div>
           {/* Column2 */}
           <div className="col">
+            <h4></h4>
+            <ui className="list-unstyled">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ui>
+          </div>
+          <div className="col">
             <h4>Simple carry your cargo</h4>
             <ui className="list-unstyled">
               <li>Fast</li>
               <li>Professional</li>
               <li>Secure</li>
+              <li></li>
               <li></li>
             </ui>
           </div>

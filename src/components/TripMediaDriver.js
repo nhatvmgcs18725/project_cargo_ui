@@ -29,6 +29,8 @@ function TripMediaDriver({ trip, group, otherGroup }) {
                       <span className="job_post"><strong>Name of consignor:</strong> {user.first_name} {user.last_name}</span>
                       <br />
                       <p> <strong>consignor phone number:  </strong>{user.phone_number}</p>
+                      <p> <strong>Distance:  </strong>{trip.cargo_distance} km</p>
+                      <h4> <p><strong>Price:  </strong>{trip.cargo_price} VND</p></h4>
                       
                       <p> <strong>Status: {trip.status}</strong></p>
                       <p> <strong>Date: {trip.update_work}</strong></p>

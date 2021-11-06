@@ -7,6 +7,7 @@ import {
   Marker
 } from '@react-google-maps/api'; // changed
 
+
 function Map (props) {
   const [response, setResponse] = useState(null); // new
 
@@ -22,10 +23,12 @@ function Map (props) {
       setResponse(response);
     }
   };
+  require('dotenv').config();
+  const mapne = process.env.REACT_APP_API_KEY_MAP;
 
   return (
     <LoadScript
-      googleMapsApiKey= 'AIzaSyCysQ8KvcKT4UIKs3CNv3dU3fI59sKfCXY' //{process.env.React_App_Map_API_KEY}
+      googleMapsApiKey= {mapne}
     >
       <GoogleMap
         center={{

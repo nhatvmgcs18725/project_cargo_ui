@@ -5,6 +5,7 @@ import {
   Breadcrumb, Button, Card, Col, Form, Row
 } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
+import '../UI/Bt.css';
 
 function ResetPasswordConfirm (props)  {
     const [isSubmitted, setSubmitted] = useState(false);
@@ -43,7 +44,7 @@ function ResetPasswordConfirm (props)  {
           <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
 
         </Breadcrumb>
-        <Card className='mb-3' bg='light' border='secondary' >
+        <Card className='taget' bg='light' border='secondary' >
           <Card.Header>Create your new password</Card.Header>
           <Card.Body>
             <Formik

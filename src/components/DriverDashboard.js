@@ -73,7 +73,7 @@ function DriverDashboard (props) {
         
 
         <TripCardDriver
-          title='Current Trip'
+          title='Current delivery Trip'
           trips={getCurrentTrips()}
           group='driver'
           otherGroup='rider'

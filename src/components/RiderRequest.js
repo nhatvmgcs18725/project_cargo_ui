@@ -81,8 +81,8 @@ const onSubmit = (values, actions) => {
     cargo_note : values.cargo_note,
     get_cargo_name : values.get_cargo_name,
     phone_number_get_cargo: values.phone_number_get_cargo,
-    cargo_price : '10',
-    cargo_distance : 1,
+    cargo_price : b,
+    cargo_distance : Convert_distance,
     
     rider: rider.id
   });
@@ -306,6 +306,10 @@ callback = {(response) => {try{const distance =  response.rows[0].elements[0].di
                       
                     />
                   </Form.Group>
+                  <Card.Text></Card.Text>
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+    <Form.Check type="checkbox" label="The transporter is entitled to co-inspect the goods before shipping under your supervisor!" required/>
+  </Form.Group>
                   <Card.Text></Card.Text>
                   {showFormzphone   && Convert_distance > 0 && (
                   <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's go</Button>

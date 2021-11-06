@@ -4,7 +4,7 @@ import {
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-import TripCardDriver from './TripCardDriver';
+import TripCardDriverHis from './TripCardDriverHis';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function Driverhistory (props) {
@@ -60,7 +60,7 @@ function Driverhistory (props) {
         </Breadcrumb>
         </Card>
         <Card className='mb-3' bg = 'light' border="secondary">
-        <TripCardDriver
+        <TripCardDriverHis
           title='Recent Trips'
           trips={getCompletedTrips()}
           group='driver'

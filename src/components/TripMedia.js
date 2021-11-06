@@ -170,7 +170,15 @@ function TripMedia ({ trip, group, otherGroup }) {
           </div>
         </div>
       </div>
-      
+      <div>
+      <Map
+                    lat={lat}
+                    lng={lng}
+                    zoom={13}
+                    pickUpAddress={trip.pick_up_address}
+                    dropOffAddress={trip.drop_off_address}
+                  />
+      </div>
   
     </div>
   );

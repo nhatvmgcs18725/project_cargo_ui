@@ -40,10 +40,7 @@ function ResetPasswordConfirm (props)  {
   return (
     <Row>
       <Col lg={12}>
-        <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
-
-        </Breadcrumb>
+       
         <Card className='taget' bg='light' border='secondary' >
           <Card.Header>Create your new password</Card.Header>
           <Card.Body>

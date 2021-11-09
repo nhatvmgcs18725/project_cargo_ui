@@ -51,8 +51,8 @@ function SignUp (props) {
           <Breadcrumb.Item active>Sign up</Breadcrumb.Item>
         </Breadcrumb>
         </Card>
-        <Card className='taget' bg = 'light' border="secondary">
-          <Card.Header>Sign up</Card.Header>
+        <Card className='taget' bg = 'light' border="secondary" size='sm'>
+          
           <Card.Body>
             <Formik
               initialValues={{
@@ -203,10 +203,12 @@ function SignUp (props) {
                     <Form.Control
                       className={ 'image' in errors ? 'is-invalid' : '' }
                       name='image'
+                      size="sm"
                       onChange={event => {
                         setFieldValue('image', event.currentTarget.files[0]);
                       }}
                       type='file'
+                      
                       
                     />
                     {
@@ -220,7 +222,7 @@ function SignUp (props) {
               )}
             </Formik>
           </Card.Body>
-          <p className='mt-2 text-center'>
+          <p className='mt-1 text-center'>
             Already have an account? <Link to='/log-in'>Log in!</Link>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Forgot password? <Link to='/reset-password'>Reset password!</Link>

@@ -45,7 +45,7 @@ function RiderDetail ({ match }) {
     tripMedia = (
       <TripMedia
         trip={trip}
-        otherGroup='rider'
+        otherGroup='driver'
       />
     )
   }

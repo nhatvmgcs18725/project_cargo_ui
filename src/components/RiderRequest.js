@@ -168,7 +168,7 @@ function RiderRequest(props) {
                       name='get_cargo_name'
                       onChange={handleChange}
                       minLength={2}
-                      pattern='[a-zA-Z ]*$'
+                      pattern='^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẾẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$'
                       values={values.get_cargo_name}
 
                       required

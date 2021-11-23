@@ -40,7 +40,7 @@ function RiderDetail ({ match }) {
   let tripMedia;
 
   if (trip === null) {
-    tripMedia = <>Sorry this trip is not available!</>;
+    tripMedia = <>Loading please wait the moment!!</>;
   } else {
     tripMedia = (
       <TripMedia

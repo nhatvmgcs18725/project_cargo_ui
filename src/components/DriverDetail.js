@@ -43,7 +43,7 @@ function DriverDetail({ match }) {
 
 
   if (trip === null) {
-    tripMedia = <>Loading...</>;
+    tripMedia = <>Sorry this trip is not available!</>;
   } else {
     tripMedia = (
       <TripMedia

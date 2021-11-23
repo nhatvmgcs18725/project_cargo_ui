@@ -35,6 +35,14 @@ function TripMediaDriverHis({ trip, group, otherGroup }) {
                       <p> <strong>Status: {trip.status}</strong></p>
                       <p> <strong>Date: {trip.update_work}</strong></p>
                       <div>
+                      
+                      {
+          href &&
+          <LinkContainer to={href}>
+            <Button variant='success' block className="Butt1">Detail</Button>
+          </LinkContainer>
+        }
+              
                       </div>
                     </div>                
                   </div>

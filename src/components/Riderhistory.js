@@ -42,7 +42,7 @@ function Riderhistory (props) {
 
   const getCompletedTrips = () => {
     return trips.filter(trip => {
-      return trip.status === 'COMPLETED';
+      return trip.status === 'COMPLETED'
     });
   };
 

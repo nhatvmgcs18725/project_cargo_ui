@@ -4,9 +4,10 @@ import {
 } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-
+import '../UI/Bt.css';
 
 import TripCardRiderH from './TripCardRiderhistory';
+import TripCardRiderR from './TripCardRiderRequest';
 import { connect, getTrips, messages } from '../services/TripService';
 
 function RiderDashboard (props) {
@@ -50,6 +51,14 @@ function RiderDashboard (props) {
       );
     });
   };
+  const getRequestTrips = () => {
+    return trips.filter(trip => {
+      return (
+        trip.driver === null &&
+        trip.status === 'REQUESTED'
+      );
+    });
+  };
 
   const updateToast = (trip) => {
     if (trip.status === 'STARTED') {
@@ -73,13 +82,19 @@ function RiderDashboard (props) {
           <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
         </Breadcrumb>
         </Card>
-
         <TripCardRiderH
           title='Current Trip To send'
           trips={getCurrentTrips()}
           group='rider'
           otherGroup='driver'
         />
+        <TripCardRiderR
+          title='Request Trip'
+          trips={getRequestTrips()}
+          group='rider'
+          otherGroup='driver'
+        />
+       
        
 
       </Col>

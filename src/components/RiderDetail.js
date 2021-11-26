@@ -5,6 +5,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 
 import TripMedia from './TripMediaRider';
+import TripMediaRiderRequestD from './TripMediaRiderRequestdetail';
 import { getUser } from '../services/AuthService';
 import { getTrip, updateTrip } from '../services/TripService';
 import '../UI/Bt.css';
@@ -38,16 +39,26 @@ function RiderDetail ({ match }) {
   };
 
   let tripMedia;
+  let tripMedia2;
 
   if (trip === null) {
     tripMedia = <>Loading please wait the moment!!</>;
+    tripMedia2 = <>Loading please wait the moment!!</>;
   } else {
+    if (trip.status !== 'REQUESTED' && trip.status !=='CANCELD'){
     tripMedia = (
       <TripMedia
         trip={trip}
         otherGroup='driver'
       />
+    )}
+    else {tripMedia2 = (
+      <TripMediaRiderRequestD
+        trip={trip}
+        otherGroup='driver'
+      />
     )
+  }
   }
 
   return (
@@ -63,7 +74,6 @@ function RiderDetail ({ match }) {
           <Card.Header>Trip</Card.Header>
           <Card.Body>{tripMedia}</Card.Body>
           <Card.Footer>
-          
             {
               trip !== null && trip.status === 'STARTED' && (
                 <Button
@@ -83,6 +93,29 @@ function RiderDetail ({ match }) {
               )
             }
           </Card.Footer>
+
+
+          <Card.Body>{tripMedia2}</Card.Body>
+          <Card.Footer>
+          
+            {
+              trip !== null && trip.status === 'REQUESTED' && (
+                <Button
+                  className="Butt"
+                  data-cy='status-button'
+                  block
+                  variant='danger'
+                  onClick={() => updateTripStatus('CANCELD')}
+                >Cancel trip
+                </Button>
+              )
+            }
+            
+            {
+              trip !== null && !['STARTED', 'IN_PROGRESS','COMPLETED'].includes(trip.status)
+            }
+          </Card.Footer>
+
         </Card>
       </Col>
     </Row>

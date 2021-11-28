@@ -200,8 +200,8 @@ function RiderRequest(props) {
                       className={'cargo_weight' in errors ? 'is-invalid' : ''}
                       name='cargo_weight'
                       onChange={handleChange}
-                      maxLength={3}
-                      pattern='^\d+(\.\d+)*$'
+                      maxLength={4}
+                      pattern='^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$'
                       values={values.cargo_weight}
                       required
                     />
@@ -312,7 +312,7 @@ function RiderRequest(props) {
                     <Form.Check type="checkbox" label="The transporter is entitled to co-inspect the goods before shipping under your supervisor!" required />
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  {showFormzphone && Convert_distance > 0 && (
+                  {showFormzphone && Convert_distance > 0 && values.cargo_weight < 100 && (
                     <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's go</Button>
                   )}
                 </Form>

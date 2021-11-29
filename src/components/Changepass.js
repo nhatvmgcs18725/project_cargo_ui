@@ -45,7 +45,7 @@ function Change_pass (props) {
         <Card.Header>
       <Breadcrumb>
           <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
-          <Breadcrumb.Item active>Change password</Breadcrumb.Item>
+          <Breadcrumb.Item active>Change passwords</Breadcrumb.Item>
         </Breadcrumb>
         </Card.Header>
         <Card.Body>

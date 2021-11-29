@@ -64,10 +64,10 @@ function RiderRequest(props) {
   const Convert_distance = (convertDistance(distancee, 'km')).toFixed(2)
   let a = 0;
   if (notee === 'Fragile goods') {
-    a = ((parseFloat(weight) * 3000 * 1.5 * Math.round(Convert_distance)) + 5000);
+    a = ((((parseFloat(weight) * 3500) + (Math.round(Convert_distance) * 2500)) * 1.3) + 5000);
   }
   else {
-    a = ((parseFloat(weight) * 3000 * Math.round(Convert_distance)) + 5000);
+    a = (((parseFloat(weight) * 3500) + (Math.round(Convert_distance)* 2500)) + 5000);
 
   }
   const b = Math.round(a)
@@ -195,7 +195,7 @@ function RiderRequest(props) {
                     }
                   </Form.Group>
                   <Form.Group controlId='cargo_weight'>
-                    <Form.Label>cargo weight as kilogram:</Form.Label>
+                    <Form.Label>Cargo weight as kilogram less than 500 kilograms, and greater than 0 kilogram:</Form.Label>
                     <Form.Control
                       className={'cargo_weight' in errors ? 'is-invalid' : ''}
                       name='cargo_weight'
@@ -211,7 +211,7 @@ function RiderRequest(props) {
                     }
                   </Form.Group>
                   <Form.Group controlId='group'>
-                    <Form.Label>commodity type</Form.Label>
+                    <Form.Label>Cargo type</Form.Label>
                     <Form.Control
                       as='select'
 
@@ -230,7 +230,7 @@ function RiderRequest(props) {
                       name='pickUpAddress'
                       onChange={handleChange}
                       values={values.pickUpAddress}
-                      minLength={6}
+                      minLength={10}
                       required
                     />
                   </Form.Group>
@@ -243,7 +243,7 @@ function RiderRequest(props) {
                       name='dropOffAddress'
                       onChange={handleChange}
                       values={values.dropOffAddress}
-                      minLength={6}
+                      minLength={10}
                       required
 
                     />
@@ -312,7 +312,7 @@ function RiderRequest(props) {
                     <Form.Check type="checkbox" label="The transporter is entitled to co-inspect the goods before shipping under your supervisor!" required />
                   </Form.Group>
                   <Card.Text></Card.Text>
-                  {showFormzphone && Convert_distance > 0 && values.cargo_weight < 100 && (
+                  {showFormzphone && Convert_distance > 0 && values.cargo_weight < 500 && (
                     <Button className="Butt" block type='submit' variant='info' disabled={isSubmitting}>Let's go</Button>
                   )}
                 </Form>
